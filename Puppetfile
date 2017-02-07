@@ -87,6 +87,10 @@ mod 'maestrodev/rvm',
    :git => 'git://github.com/maestrodev/puppet-rvm',
    :tag => 'v1.13.1'
 
+mod 'puppetlabs/ruby',
+    :git => 'git://github.com/puppetlabs/puppetlabs-ruby',
+    :tag => '0.6.0'
+
 mod 'golja/s3cmd',
     :git => 'git://github.com/n1tr0g/golja-s3cmd',
     :tag => '0.1.0'
