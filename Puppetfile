@@ -4,7 +4,9 @@
 # For a masterless puppet you can set the moduledir in
 # the Puppetfile to deliver modules outside of the
 # environment tree.
-moduledir 'code/modules/thirdparty'
+# -- Actually this is all taken care of by the relative path
+# for modulepath in environment.conf
+#moduledir 'code/modules/thirdparty'
 
 forge 'https://forgeapi.puppetlabs.com'
 
