@@ -2,7 +2,7 @@
 #^syntax detection
 
 #moduledir 'modules/thirdparty'
-moduledir '/etc/puppetlabs/code/modules/thirdparty'
+moduledir 'code/modules/thirdparty'
 
 forge 'https://forgeapi.puppetlabs.com'
 
