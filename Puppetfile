@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-#moduledir 'modules/thirdparty'
-##moduledir 'code/modules/thirdparty'
-#moduledir '../../modules/thirdparty'
+# For a masterless puppet you can set the moduledir in
+# the Puppetfile to deliver modules outside of the
+# environment tree.
+moduledir 'code/modules/thirdparty'
 
 forge 'https://forgeapi.puppetlabs.com'
 
