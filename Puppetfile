@@ -1,13 +1,6 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-# For a masterless puppet you can set the moduledir in
-# the Puppetfile to deliver modules outside of the
-# environment tree.
-# -- Actually this is all taken care of by the relative path
-# for modulepath in environment.conf
-#moduledir 'code/modules/thirdparty'
-
 forge 'https://forgeapi.puppetlabs.com'
 
 
@@ -35,7 +28,6 @@ mod 'stahnma/epel',
 #    :git => 'git://github.com/NYULibraries/puppet-fedora_repository'
 #    #:tag => '0.1.0'
 
-#mod 'golja/gnupg',
 mod 'n1tr0g/gnupg',
     :git => 'git://github.com/n1tr0g/golja-gnupg.git',
     :tag => '1.2.3'
@@ -61,7 +53,8 @@ mod 'yo61/logrotate',
     :tag => 'v1.4.0'
 
 mod 'NYULibraries/loris',
-    :git => 'git://github.com/NYULibraries/puppet-loris'
+    :git => 'git://github.com/NYULibraries/puppet-loris',
+    :tag => 'v0.1.4'
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
