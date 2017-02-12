@@ -66,7 +66,7 @@ mod 'puppetlabs/ntp',
 
 mod 'stankevich/python',
     :git => 'git://github.com/stankevich/puppet-python',
-    :tag => '1.14.0'
+    :tag => '1.18.2'
 
 mod 'zack/r10k',
     :git => 'git://github.com/acidprime/r10k',
