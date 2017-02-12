@@ -54,7 +54,7 @@ mod 'yo61/logrotate',
 
 mod 'NYULibraries/loris',
     :git => 'git://github.com/NYULibraries/puppet-loris',
-    :tag => 'v0.1.3'
+    :tag => 'v0.1.4'
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
