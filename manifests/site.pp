@@ -14,6 +14,10 @@ node /jetty/ {
   include roles::jetty
 }
 
+node /kbmaster/ {
+  include roles::kbmaster
+}
+
 node /nexus/ {
   include roles::nexus
 }
