@@ -1,3 +1,3 @@
 node default {
-  include roles::loris
+  include roles::kbmaster
 }
