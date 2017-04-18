@@ -26,6 +26,11 @@ node /puppet4/ {
   include roles::puppet4
 }
 
+
+node /puppet/ {
+  include roles::puppet_enterprise
+}
+
 node /solr-server/ {
   include roles::solr
 }
