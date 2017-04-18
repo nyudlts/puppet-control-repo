@@ -39,6 +39,10 @@ node /test-rvm/ {
   include roles::test_rvm
 }
 
+node /rpmfactory/ {
+  include roles::rpmfactory
+}
+
 node /uqbar/ {
   include roles::uqbar
 }
