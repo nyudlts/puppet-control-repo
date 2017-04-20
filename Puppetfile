@@ -97,7 +97,7 @@ mod 'petems/swap_file',
   :git => 'git://github.com/petems/petems-swap_file',
   :tag => 'v3.0.2'
 
-mod 'theforeman/puppet-foreman',
+mod 'theforeman/foreman',
   :git => 'git://github.com/theforeman/puppet-foreman',
   :tag => '7.2.0'
 
