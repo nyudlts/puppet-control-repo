@@ -21,8 +21,12 @@ mod 'puppetlabs/concat',
   :tag => '2.2.0'
 
 mod 'stahnma/epel', 
-    :git => 'git://github.com/stahnma/puppet-module-epel',
-    :tag => '1.2.2'
+  :git => 'git://github.com/stahnma/puppet-module-epel',
+  :tag => '1.2.2'
+
+mod 'voxpupuli/extlib',
+  :git => 'git://github.com/voxpupuli/puppet-extlib',
+  :tag => 'v1.1.0'
 
 #mod 'NYULibraries/fedora_repository',
 #    :git => 'git://github.com/NYULibraries/puppet-fedora_repository'
