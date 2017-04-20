@@ -1,3 +1,3 @@
 node default {
-  include roles::theforman
+  include roles::theforeman
 }
