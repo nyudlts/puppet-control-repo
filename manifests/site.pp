@@ -35,6 +35,10 @@ node /solr-server/ {
   include roles::solr
 }
 
+node /spacewalk/ {
+  include roles::spacewalk
+}
+
 node /test-rvm/ {
   include roles::test_rvm
 }
