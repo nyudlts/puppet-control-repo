@@ -20,9 +20,9 @@ mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
   :tag => '2.2.0'
 
-#mod 'stahnma/epel', 
-#  :git => 'git://github.com/stahnma/puppet-module-epel',
-#  :tag => '1.2.2'
+mod 'stahnma/epel', 
+  :git => 'git://github.com/stahnma/puppet-module-epel',
+  :tag => '1.2.2'
 
 mod 'voxpupuli/extlib',
   :git => 'git://github.com/voxpupuli/puppet-extlib',
