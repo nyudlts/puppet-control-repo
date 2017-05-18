@@ -21,8 +21,12 @@ mod 'puppetlabs/concat',
   :tag => '2.2.0'
 
 mod 'stahnma/epel', 
-    :git => 'git://github.com/stahnma/puppet-module-epel',
-    :tag => '1.2.2'
+  :git => 'git://github.com/stahnma/puppet-module-epel',
+  :tag => '1.2.2'
+
+mod 'voxpupuli/extlib',
+  :git => 'git://github.com/voxpupuli/puppet-extlib',
+  :tag => 'v1.1.0'
 
 #mod 'NYULibraries/fedora_repository',
 #    :git => 'git://github.com/NYULibraries/puppet-fedora_repository'
@@ -33,17 +37,13 @@ mod 'n1tr0g/gnupg',
     :git => 'git://github.com/n1tr0g/golja-gnupg.git',
     :tag => '1.2.3'
 
-mod 'puppetlabs/inifile',
-    :git => 'git://github.com/puppetlabs/puppetlabs-inifile.git',
-    :tag => '1.6.0'
-
 mod 'voxpupuli/hiera',
         :git => 'https://github.com/voxpupuli/puppet-hiera.git',
         :tag => 'v2.4.0'
 
 mod 'puppetlabs/inifile',
-    :git => 'git://github.com/puppetlabs/puppetlabs-inifile',
-    :tag => '1.5.0'
+    :git => 'git://github.com/puppetlabs/puppetlabs-inifile.git',
+    :tag => '1.6.0'
 
 mod 'puppetlabs/java',
     :git => 'git://github.com/puppetlabs/puppetlabs-java',
@@ -82,24 +82,28 @@ mod 'puppetlabs/ruby',
   :tag => '0.6.0'
 
 mod 'maestrodev/rvm',
-   :git => 'git://github.com/maestrodev/puppet-rvm',
-   :tag => 'v1.13.1'
+  :git => 'git://github.com/maestrodev/puppet-rvm',
+  :tag => 'v1.13.1'
 
 mod 'golja/s3cmd',
-    :git => 'git://github.com/n1tr0g/golja-s3cmd',
-    :tag => '0.1.0'
+  :git => 'git://github.com/n1tr0g/golja-s3cmd',
+  :tag => '0.1.0'
 
 mod 'voxpupuli/staging',
-    :git => 'git://github.com/voxpupuli/puppet-staging',
-    :tag => 'v1.0.7'
+  :git => 'git://github.com/voxpupuli/puppet-staging',
+  :tag => 'v1.0.7'
 
 mod 'puppetlabs/stdlib',
-    :git => 'git://github.com/puppetlabs/puppetlabs-stdlib',
-    :tag => '4.15.0'
+  :git => 'git://github.com/puppetlabs/puppetlabs-stdlib',
+  :tag => '4.15.0'
 
 mod 'petems/swap_file',
-        :git => 'git://github.com/petems/petems-swap_file',
-        :tag => 'v3.0.2'
+  :git => 'git://github.com/petems/petems-swap_file',
+  :tag => 'v3.0.2'
+
+mod 'theforeman/foreman',
+  :git => 'git://github.com/theforeman/puppet-foreman',
+  :tag => '7.2.0'
 
 mod 'puppetlabs/vcsrepo',
     :git => 'git://github.com/puppetlabs/puppetlabs-vcsrepo',

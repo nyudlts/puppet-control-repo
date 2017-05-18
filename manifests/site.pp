@@ -26,8 +26,17 @@ node /puppet4/ {
   include roles::puppet4
 }
 
+
+node /puppet/ {
+  include roles::puppet_enterprise
+}
+
 node /solr-server/ {
   include roles::solr
+}
+
+node /spacewalk/ {
+  include roles::spacewalk
 }
 
 node /test-rvm/ {
@@ -36,6 +45,10 @@ node /test-rvm/ {
 
 node /tlon/ {
   include roles::tlon
+}
+
+node /theforeman/ {
+  include roles::theforeman
 }
 
 node /rpmfactory/ {
