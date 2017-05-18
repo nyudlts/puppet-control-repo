@@ -28,8 +28,7 @@ class profiles::test_tlon (
   }
 
   include maven
-  include apache
-  #include dlib_apache_tlon
+  include dlib_apache_tlon
 
   #package { 'centos-release-scl':
   #  ensure => installed,
