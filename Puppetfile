@@ -20,6 +20,10 @@ mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
   :tag => '2.2.0'
 
+mod 'fj5/dlib_apache_tlon',
+    :git => 'git://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
+    #:ref => '0.1.4'
+
 mod 'stahnma/epel', 
   :git => 'git://github.com/stahnma/puppet-module-epel',
   :tag => '1.2.2'
