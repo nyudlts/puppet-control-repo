@@ -4,6 +4,7 @@
 
 :hierarchy:
   - common
+  - classes
 #  - clientcert/%{clientcert}
 #  - puppet_role/%{puppet_role}
 #  - global
