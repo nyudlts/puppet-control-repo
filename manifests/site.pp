@@ -43,9 +43,14 @@ node /test-rvm/ {
   include roles::test_rvm
 }
 
+node /tlon/ {
+  include roles::tlon
+}
+
 node /theforeman/ {
   include roles::theforeman
 }
+
 node /rpmfactory/ {
   include roles::rpmfactory
 }
