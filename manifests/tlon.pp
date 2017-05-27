@@ -1,4 +1,4 @@
 node default {
-  include roles::default
+  include roles::base
   #include roles::tlon
 }
