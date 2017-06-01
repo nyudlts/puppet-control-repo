@@ -5,7 +5,7 @@ class housekeeping (
 
   include housekeeping::packages
   #include housekeeping::python
-  include housekeeping::aws
+  #include housekeeping::aws
   include housekeeping::ruby
   include housekeeping::r10k
 
