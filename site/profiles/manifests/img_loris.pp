@@ -27,6 +27,10 @@ class profiles::img_loris (
   include loris
   include loris::apache
   include loris::apache::vhost
+  include loris::cache
+  include loris::demo
+
+
 
   Class['loris::apache']->Class['loris::apache::vhost']->Class['loris']
 
