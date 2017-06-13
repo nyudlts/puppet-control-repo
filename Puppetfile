@@ -64,24 +64,28 @@ mod 'NYULibraries/loris',
     :tag => 'v0.1.6'
 
 mod 'puppetlabs/mysql',
-    :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
-    :tag => '3.8.0'
+  :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
+  :tag => '3.8.0'
 
 mod 'puppetlabs/ntp',
-    :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
-    :tag => '6.0.0'
+  :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
+  :tag => '6.0.0'
+
+mod 'puppetlabs/postgresql',
+  :git => 'git://github.com/puppetlabs/puppetlabs-postgresql',
+  :tag => '4.9.0'
 
 mod 'stankevich/python',
-    :git => 'git://github.com/stankevich/puppet-python',
-    :tag => '1.14.0'
+  :git => 'git://github.com/stankevich/puppet-python',
+  :tag => '1.14.0'
 
-mod 'zack/r10k',
-    :git => 'git://github.com/acidprime/r10k',
-    :tag => 'v3.2.0'
+#mod 'zack/r10k',
+#  :git => 'git://github.com/acidprime/r10k',
+#  :tag => 'v3.2.0'
 
 mod 'jdowning/rbenv',
-    :git => 'git://github.com/justindowning/puppet-rbenv',
-    :tag => '2.2.0'
+  :git => 'git://github.com/justindowning/puppet-rbenv',
+  :tag => '2.2.0'
 
 mod 'puppetlabs/ruby',
   :git => 'git://github.com/puppetlabs/puppetlabs-ruby',
