@@ -39,7 +39,7 @@ class profiles::db_postgres {
 
   include postgresql::server
 
-  postgresql::server::db ( 'testdb':
+  postgresql::server::db { 'testdb':
     user     => 'testy',
     password => postgresql_password('testy', 'letmein'),
   }
