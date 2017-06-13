@@ -37,5 +37,23 @@
 #
 class profiles::db_postgres {
 
+  include postgresql::server
+
+  postgresql::server::db ( 'testdb':
+    user     => 'testy',
+    password => postgresql_password('testy', 'letmein'),
+  }
+
+  postgresql::server::role { 'tct':
+    password_hash => postgresql_password('tct', 'letmeout'),
+  }
+
+  postgresql::server::database_grant ('testy':
+    privilege => 'ALL',
+    db        => 'testdb',
+    role      => 'tct',
+  }
+
+
 
 }
