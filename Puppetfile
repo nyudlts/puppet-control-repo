@@ -71,6 +71,10 @@ mod 'voxpupuli/nginx',
   :git => 'git://github.com/voxpupuli/puppet-nginx',
   :tag => 'v0.6.0'
 
+mod 'voxpupuli/nodejs',
+  :git => 'git://github.com/voxpupuli/puppet-nodejs',
+  :tag => 'v3.0.0'
+
 mod 'puppetlabs/ntp',
   :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
   :tag => '6.0.0'
