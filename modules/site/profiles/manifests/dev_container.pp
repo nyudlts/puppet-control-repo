@@ -21,6 +21,8 @@ class profiles::dev_container {
     gid    => '200',
   }
 
+  ensure_packages(['golang'], {'ensure' => 'present'})
+
   class { 'java' :
     package => 'java-1.8.0-openjdk-devel',
   }
