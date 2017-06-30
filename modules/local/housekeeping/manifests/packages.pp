@@ -24,6 +24,7 @@ class housekeeping::packages (
     'sqlite-devel',
     'zlib-devel',
     'unzip',
+    'yum-utils',
     'zip',
     'zlib-devel',
   ])
