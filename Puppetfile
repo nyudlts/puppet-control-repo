@@ -1,21 +1,32 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
+moduledir 'modules/thirdparty'
+
 forge 'https://forgeapi.puppetlabs.com'
 
 
 mod 'camptocamp/accounts',
   :git => 'git://github.com/camptocamp/puppet-accounts',
-  :tag => '1.8.1'
+  :tag => '1.9.3'
 
 mod 'puppetlabs/apache',
   :git => 'git://github.com/puppetlabs/puppetlabs-apache',
   :tag => '1.11.0'
   #:tag => '1.10.0'
 
-mod 'puppetlats/aws',
-  :git => 'git://github.com/puppetlabs/puppetlabs-aws',
-  :tag => '1.0.0'
+mod 'flannon/archivesspace',
+    :git => 'git://github.com/flannon/puppet-archivesspace.git',
+    :ref => '0.1.4'
+    #:ref => 'master'
+
+mod 'flannon/archivesspace_dev',
+    :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
+    :ref => 'master'
+
+mod 'puppetlabs/firewall',
+    :git => 'git://github.com/puppetlabs/puppetlabs-firewall.git',
+    :ref => '1.8.1'
 
 mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
@@ -38,7 +49,6 @@ mod 'voxpupuli/extlib',
 #    :git => 'git://github.com/NYULibraries/puppet-fedora_repository'
 #    #:tag => '0.1.0'
 
-#mod 'golja/gnupg',
 mod 'n1tr0g/gnupg',
     :git => 'git://github.com/n1tr0g/golja-gnupg.git',
     :tag => '1.2.3'
@@ -64,32 +74,24 @@ mod 'NYULibraries/loris',
     :tag => 'v0.1.6'
 
 mod 'puppetlabs/mysql',
-  :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
-  :tag => '3.8.0'
-
-mod 'voxpupuli/nginx',
-  :git => 'git://github.com/voxpupuli/puppet-nginx',
-  :tag => 'v0.6.0'
+    :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
+    :tag => '3.8.0'
 
 mod 'puppetlabs/ntp',
-  :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
-  :tag => '6.0.0'
-
-mod 'puppetlabs/postgresql',
-  :git => 'git://github.com/puppetlabs/puppetlabs-postgresql',
-  :tag => '4.9.0'
+    :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
+    :tag => '6.0.0'
 
 mod 'stankevich/python',
-  :git => 'git://github.com/stankevich/puppet-python',
-  :tag => '1.14.0'
+    :git => 'git://github.com/stankevich/puppet-python',
+    :tag => '1.14.0'
 
-#mod 'zack/r10k',
-#  :git => 'git://github.com/acidprime/r10k',
-#  :tag => 'v3.2.0'
+mod 'zack/r10k',
+    :git => 'git://github.com/acidprime/r10k',
+    :tag => 'v3.2.0'
 
 mod 'jdowning/rbenv',
-  :git => 'git://github.com/justindowning/puppet-rbenv',
-  :tag => '2.2.0'
+    :git => 'git://github.com/justindowning/puppet-rbenv',
+    :tag => '2.2.0'
 
 mod 'puppetlabs/ruby',
   :git => 'git://github.com/puppetlabs/puppetlabs-ruby',
@@ -99,9 +101,9 @@ mod 'maestrodev/rvm',
   :git => 'git://github.com/maestrodev/puppet-rvm',
   :tag => 'v1.13.1'
 
-mod 'golja/s3cmd',
-  :git => 'git://github.com/n1tr0g/golja-s3cmd',
-  :tag => '0.1.0'
+mod 'voxpupuli/selinux',
+  :git => 'git://github.com/voxpupuli/puppet-selinux',
+  :tag => 'v1.1.0'
 
 mod 'voxpupuli/staging',
   :git => 'git://github.com/voxpupuli/puppet-staging',
@@ -115,10 +117,6 @@ mod 'petems/swap_file',
   :git => 'git://github.com/petems/petems-swap_file',
   :tag => 'v3.0.2'
 
-mod 'theforeman/foreman',
-  :git => 'git://github.com/theforeman/puppet-foreman',
-  :tag => '7.2.0'
-
 mod 'puppetlabs/vcsrepo',
     :git => 'git://github.com/puppetlabs/puppetlabs-vcsrepo',
     :tag => '1.3.2'
@@ -131,23 +129,6 @@ mod 'puppetlabs/tomcat',
 #    :git => 'git://github.com/antoineco/aco-yum_autoupdate',
 #    :ref => '0.6.3'
 
-mod 'treydock/yum_cron',
-    :git => 'git://github.com/treydock/puppet-yum_cron.git',
-    :tag => '2.0.0'
-
-mod 'flannon/archivesspace',
-    :git => 'git://github.com/flannon/puppet-archivesspace.git',
-    :ref => '0.1.4'
-    #:ref => 'master'
-
-mod 'flannon/archivesspace_dev',
-    :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
-    :ref => 'master'
-
-mod 'puppetlabs/firewall',
-    :git => 'git://github.com/puppetlabs/puppetlabs-firewall.git',
-    :ref => '1.8.1'
-
 #mod 'Sliim/pyenv',
 #    :git => 'git://github.com/Sliim/puppet-pyenv.git',
 #    :tag => '0.1.1'
@@ -156,7 +137,7 @@ mod 'puppetlabs/firewall',
 mod 'flannon/pyenv',
     :git => 'git://github.com/flannon/puppet-pyenv.git'
 
-mod 'Mylezeem/repoforge', 
-     :git => 'git://github.com/Mylezeem/puppet-repoforge.git',
-     :ref => "0.2.1"
+mod 'treydock/yum_cron',
+    :git => 'git://github.com/treydock/puppet-yum_cron.git',
+    :tag => '2.0.0'
 

@@ -1,3 +1,7 @@
+node /^bastion/ {
+  include roles::bastion
+}
+
 node /loris/ {
   include roles::loris
 }
