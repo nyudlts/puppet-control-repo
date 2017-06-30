@@ -48,6 +48,6 @@ class profiles::dev_container {
   }
 
   include pyenv
-  pyenv::install { ['centos','root']: }
+  #pyenv::install { ['centos','root']: }
 
 }
