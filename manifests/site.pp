@@ -2,6 +2,10 @@ node /^bastion/ {
   include roles::bastion
 }
 
+node /^container/ {
+  include roles::container
+}
+
 node /loris/ {
   include roles::loris
 }
