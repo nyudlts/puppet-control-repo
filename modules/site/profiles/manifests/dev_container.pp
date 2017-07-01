@@ -13,6 +13,8 @@
 #
 class profiles::dev_container {
 
+  notice ('This is from the development module directory')
+  
   include housekeeping
 
   # Add default group and users
@@ -21,7 +23,7 @@ class profiles::dev_container {
     gid    => '200',
   }
 
-  ensure_packages(['golang'], {'ensure' => 'present'})
+  #ensure_packages(['golang'], {'ensure' => 'present'})
 
   class { 'java' :
     package => 'java-1.8.0-openjdk-devel',
@@ -51,5 +53,37 @@ class profiles::dev_container {
 
   include pyenv
   #pyenv::install { ['centos','root']: }
+
+  #if $facts['virtual'] == 'virtualbox' {
+  #  warning('Virtualization is vbox')
+  #  $users = ['root', 'vagrant']
+  #}
+  
+  #warning("users - $users")
+  #$users.each |String $users| {
+  #  alert("users - $users")
+  #  if $users == 'root' {
+  #    alert("users should be root - $users")
+  #    $userhome = "/${users}"
+  #    alert("users should be /root - $userhome")
+  #    housekeeping::goenv{ $userhome :}
+  #  }
+  #  else {
+  #    $userhome = "/home/$users"
+  #    warning("userhome - $userhome")
+  #    #housekeeping::goenv{ $userhome : }
+  #  }
+  #}
+  include golang
+
+
+  $statements = ['this', 'is', 'the', 'last']
+  #file { "/tmp/$statements" :
+  #  ensure => present,
+  #  #notice ("statemnet - $statments")
+  #}
+  $statements.each |String $statements| {
+    warning("statement - $statements")
+  }
 
 }
