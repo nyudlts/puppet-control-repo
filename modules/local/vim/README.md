@@ -1,91 +1,83 @@
-# puppet-vim
+# vim
 
-Manage VIM via puppet.
+#### Table of Contents
 
-Vim is an advanced text editor that seeks to provide the power of the de-facto Unix editor 'Vi', with a more complete feature set. 
+1. [Description](#description)
+1. [Setup - The basics of getting started with vim](#setup)
+    * [What vim affects](#what-vim-affects)
+    * [Setup requirements](#setup-requirements)
+    * [Beginning with vim](#beginning-with-vim)
+1. [Usage - Configuration options and additional functionality](#usage)
+1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Limitations - OS compatibility, etc.](#limitations)
+1. [Development - Guide for contributing to the module](#development)
 
-This module aims to enable easy installation and configuration of VIM through class parameters on different platforms, in a way that the administrator can easily set it up differently according to need and/or personal taste.
+## Description
+
+Start with a one- or two-sentence summary of what the module does and/or what
+problem it solves. This is your 30-second elevator pitch for your module.
+Consider including OS/Puppet version it works with.
+
+You can give more descriptive information in a second paragraph. This paragraph
+should answer the questions: "What does this module *do*?" and "Why would I use
+it?" If your module has a range of functionality (installation, configuration,
+management, etc.), this is the time to mention it.
+
+## Setup
+
+### What vim affects **OPTIONAL**
+
+If it's obvious what your module touches, you can skip this section. For
+example, folks can probably figure out that your mysql_instance module affects
+their MySQL instances.
+
+If there's more that they should know about, though, this is the place to mention:
+
+* A list of files, packages, services, or operations that the module will alter,
+  impact, or execute.
+* Dependencies that your module automatically installs.
+* Warnings or other important notices.
+
+### Setup Requirements **OPTIONAL**
+
+If your module requires anything extra before setting up (pluginsync enabled,
+etc.), mention it here.
+
+If your most recent release breaks compatibility or requires particular steps
+for upgrading, you might want to include an additional "Upgrading" section
+here.
+
+### Beginning with vim
+
+The very basic steps needed for a user to get the module up and running. This
+can include setup steps, if necessary, or it can be an example of the most
+basic use of the module.
 
 ## Usage
 
-```
-    class { 'vim': }
-```
+This section is where you describe how to customize, configure, and do the
+fancy stuff with your module here. It's especially helpful if you include usage
+examples and code samples for doing things with your module.
 
-## Class parameters
-###* set_as_default
-* Accepted values: true or false
-* Default: true
-* Description: Set VIM as default editor.
+## Reference
 
-###* ensure 
-* Accepted values: present or absent 
-* Default: present
-* Description: Whether or not VIM will be installed
+Here, include a complete list of your module's classes, types, providers,
+facts, along with the parameters for each. Users refer to this section (thus
+the name "Reference") to find specific details; most users don't read it per
+se.
 
-###* autoupgrade 
-* Accepted values: true or false
-* Default: false
-* Description: Whether or not the VIM package should be automatically kept up-to-date using the distribution's packaging system
+## Limitations
 
-###* set_editor_cmd
-* Accepted values: string
-* Default: update-alternatives --set editor /usr/bin/${editor_name} (Debian)
-* Description: The command used to set VIM as the default editor. Be careful if you're setting this parameter.
+This is where you list OS compatibility, version compatibility, etc. If there
+are Known Issues, you might want to include them under their own heading here.
 
-###* test_editor_set 
-* Accepted values: string
-* Default: test /etc/alternatives/editor -ef /usr/bin/${editor_name} (Debian)
-* Description: Command used to verify that VIM is the default editor. Be careful if you're setting this parameter.
+## Development
 
-###* conf_file
-* Accepted values: string
-* Default: /etc/vim/vimrc (Debian), /etc/vimrc (RedHat)
-* Description: Path to VIM's main configuration file.
+Since your module is awesome, other users will want to play with it. Let them
+know what the ground rules for contributing are.
 
-###* opt_bg_shading
-* Accepted values: dark or light
-* Default: dark
-* Description: Terminal background colour. This affects the colour scheme used by VIM to do syntax highlighting.
+## Release Notes/Contributors/Etc. **Optional**
 
-###* opt_powersave
-* Accepted values: true or false
-* Default: true
-* Description: If set to 'true' avoids cursor blinking that might wake up the processor.
-
-###* opt_syntax
-* Accepted values: true or false
-* Default: true
-* Description: Turns on syntax highlighting if supported by the terminal.
-
-###* opt_misc
-* Accepted values: array
-* Default: ['hlsearch','showcmd','showmatch','ignorecase','smartcase','incsearch','autowrite','hidden']
-* Description: Array containing options that will be set on VIM. Anything contained here will show as a "set option" line in your virc.
-
-## Sample Usage
-Install VIM and use the provided configuration defaults
-```
-node default {
-  class { 'vim': }
-}
-```
-Turn on line numbering while keeping the default opt_misc values
-```
-node default {
-  class { 'vim':
-    opt_misc => ['hlsearch','showcmd','showmatch','ignorecase','smartcase','incsearch','autowrite','hidden','number'],
-  }
-}
-```
-Uninstall vim
-```
-node default {
-  class { 'vim':
-    ensure => absent,
-  }
-}
-```
-
-## Acknowlegments
-This module was forked from the one originally written by Saz (https://github.com/saz/puppet-vim). It adds enterprise linux support and configuration file management, which were not present on the original at the time of the first release.
+If you aren't using changelog, put your release notes here (though you should
+consider using changelog). You can also add any additional sections you feel
+are necessary or important to include here. Please use the `## ` header.
