@@ -45,5 +45,6 @@
 class golang {
 
   include golang::install
+  include golang::env
 
 }

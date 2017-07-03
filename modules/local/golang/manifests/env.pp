@@ -7,14 +7,24 @@ define golang::env {
     $userhome = "/home/$title"
   }
 
+  file { "/usr/local/go" :
+    ensure => directory,
+    #owner  => $user,
+    #group  => $user,
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => '0755',
+  }
   file_line { "${userhome} goroot":
     path => "${userhome}/.bashrc",
     line => 'export GOROOT=/usr/local/go',
   }
   file { "${userhome}/projects" :
     ensure => directory,
-    owner  => $user,
-    group  => $user,
+    #owner  => $user,
+    #group  => $user,
+    owner  => 'vagrant',
+    group  => 'vagrant',
     mode   => '0755',
   }
   file_line { "${userhome} gopath":
