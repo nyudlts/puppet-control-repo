@@ -3,3 +3,16 @@ vim::home: '/home'
 vim::position: 'os-family-RedHat.yaml'
 vim::user: 'vagrant'
 vim::group: 'vagrant'
+vim::test: 'test'
+vim::packages:
+  - automake
+  - centos-release-scl
+  - devtoolset-4-gcc
+  - devtoolset-4-gcc-c++
+  - gcc
+  - gcc-c++  
+  - kernel-devel    
+  - cmake
+  - python34-devel
+  - vim-minimal
+  - vim-enhanced  

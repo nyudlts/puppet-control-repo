@@ -12,14 +12,19 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class vim(
-  String $home = lookup('vim::home'),
+  String $home = lookup("vim::home"),
   String $plugin = $title,
-  String $group = lookup('vim::group'),
-  String $user = lookup('vim::user'),
-  String $home_dir = "$home/${user}"
+  String $group = lookup("vim::group"),
+  String $user = lookup("vim::user"),
+  String $home_dir = "$home/${user}",
+  String $test = lookup("vim::test"),
+  Array $packages = lookup("vim::packages", Array[String], 'unique'),
 ) {
-  alert ("The idenity user is: $user")
-  alert ("The home: $home")
+
+  #alert ("The idenity user is: $user")
+  #alert ("The home: $home")
+
+  ensure_packages([ $packages ], {'ensure' => 'present'})
 
   yumrepo { 'mcepl-vim8' :
     name             => 'mcepl-vim8',
@@ -31,25 +36,11 @@ class vim(
     enabled          => 1,
   }
 
-  ensure_packages([
-  'automake',
-  'centos-release-scl',
-  'devtoolset-4-gcc',
-  'devtoolset-4-gcc-c++',
-  'gcc',
-  'gcc-c++',
-  'kernel-devel',
-  'cmake',
-  'python34-devel',
-  'vim-enhanced',
-  'vim-minimal',
-  ], {'ensure' => 'present'})
-
   file { "${home}/${user}/README.vim" :
     ensure => file,
     owner  => $user,
     group  =>  $user,
-    source => "puppet:///module/vim/README.vim",
+    source => "puppet:///modules/vim/README.vim",
   }
 
 }
