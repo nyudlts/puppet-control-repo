@@ -45,11 +45,11 @@ class vim(
   'vim-minimal',
   ], {'ensure' => 'present'})
 
-  
-  file_line { 'scl_enable_devtoolset-4' :
-    ensure => absent,
-    path   => "${home}/${user}/README",
-    line   => 'scl enable devtoolset-4 bash',
+  file { "${home}/${user}/README.vim" :
+    ensure => file,
+    owner  => $user,
+    group  =>  $user,
+    source => "puppet:///module/vim/README.vim",
   }
 
 }
