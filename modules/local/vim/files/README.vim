@@ -10,3 +10,11 @@ Then build YouCompleteMe
 
   $ cd ~/.vim/bundle/YouCompleteMe
   $ ./install.py -all
+  
+
+TODO
+
+  - Right now it works for centos
+    - structure vim::setup for Ceonts and Darwin
+    - same goes for init
+
