@@ -18,19 +18,22 @@
 #){
 
 define vim::plugin (
+
   #String $home = lookup('vim::home'),
+  #String $home = lookup('vim::home', String, 'first'),
+  String $home = lookup('vim::home'),
   String $plugin = $title,
-  String $vim_group = 'staff',
-  String $vimuser = $identity['user'],
-  user
-  String $home_dir = "${home}/${user}",
+  String $group = lookup('vim::group'),
+  String $user = lookup('vim::user'),
+  String $home_dir = "$home/${user}",
 ){
 
   notice("From the defined type: $title")
+  notice("From the defined type: $group")
+
   file_line { "$title" :
     ensure => present,
     path   => "${home_dir}/.vimrc",
-    #path   => "/tmp/vimrc",
     line   => "Plugin \'${title}\'",
     after  => "^Plugin \'gmarik/Vundle.vim\'"
   }
