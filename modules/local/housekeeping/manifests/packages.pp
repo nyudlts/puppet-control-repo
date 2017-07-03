@@ -27,6 +27,6 @@ class housekeeping::packages (
     'yum-utils',
     'zip',
     'zlib-devel',
-  ])
+  ], {'ensure' => 'present'} )
 
 }
