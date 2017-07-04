@@ -21,24 +21,19 @@ define vim::setup(
   alert("vim::home - $home")
   alert("vim::positon - $position")
 
-  file_line { 'alias_vi' :
+  #file_line { 'alias_vi' :
+  #  ensure => present,
+  #  path   => "${home}/${title}/.bashrc",
+  #  line   => 'alias vi=vim',
+  #}
+
+  file_line { 'scl_source devtoolset-4' :
     ensure => present,
     path   => "${home}/${title}/.bashrc",
-    line   => 'alias vi=vim',
+    line   => '#source scl_source enable devtoolset-4',
   }
-
-  #exec { 'PluginInstall' :
-  #  command => '/usr/local/bin/vim +PluginInstall +qall 2>&1 1> /dev/null',
-  #  path    => '/usr/local/bin',
-  #}
-
-  #exec { 'git_editor' :
-  #  command => 'git config --global core.editor $(which vim)',
-  #  path => [ "/usr/local/bin/git", "/usr/bin" ],
-  #}
-
-
-  notice("From the defined type: $title")
+  
+  alert("From the defined type: $title")
 
   file { "${home}/${title}/.vim" :
     ensure  => directory,
@@ -72,19 +67,11 @@ define vim::setup(
   #}
 
   concat { "${home}/${title}/.vimrc" :
-    #concat { $vimrc :
     owner   => $title,
     group   => $title,
     mode    => '0644',
     replace => true,
   }
-  #file { $vimrc :
-  #  ensure  => file,
-  #  owner   => $title,
-  #  group   => $title,
-  #  mode    => '0644',
-  #  replace =>  true,
-  #}
   concat::fragment{ 'vimrc_header':
     target => $vimrc,
     source => "puppet:///modules/vim/vimrc_header",
@@ -100,5 +87,18 @@ define vim::setup(
     source => "puppet:///modules/vim/vimrc_footer",
     order  => '03',
   }
+
+  # TODO
+  # - figure out how to run PluginInstall
+  #exec { 'PluginInstall' :
+  #  command => '/usr/local/bin/vim +PluginInstall +qall 2>&1 1> /dev/null',
+  #  path    => '/usr/local/bin',
+  #}
+
+  # - set vim as the git global editor
+  #exec { 'git_editor' :
+  #  command => 'git config --global core.editor $(which vim)',
+  #  path => [ "/usr/local/bin/git", "/usr/bin" ],
+  #}
 
 }

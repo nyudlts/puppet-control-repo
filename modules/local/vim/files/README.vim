@@ -1,8 +1,11 @@
-Before building YouCompleteMe enable gcc 5 by doing,
+1. Before building YouCompleteMe enable scl devtoolset-4 by uncommenting the
+following line in .bashrc and then sourcing .bashrc and installing plugins,
 
-  $ scl enable devtoolset-4 bash
+  .bashrc: #scl enable devtoolset-4 bash
+  $ . .bashrc
+  $ vim +PluginInstall +qall
 
-Also upgrade vim to vim8
+2. Upgrade vim to vim8
 
   $ sudo yum install vim-minimal vim-enhanced
 
@@ -15,6 +18,6 @@ Then build YouCompleteMe
 TODO
 
   - Right now it works for centos
-    - structure vim::setup for Ceonts and Darwin
+    - structure vim::setup for Centos and Darwin
     - same goes for init
 

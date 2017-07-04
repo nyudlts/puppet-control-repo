@@ -13,18 +13,18 @@
 #
 class vim(
   String $home = lookup("vim::home"),
-  String $plugin = $title,
-  String $group = lookup("vim::group"),
-  String $user = lookup("vim::user"),
-  String $home_dir = "$home/${user}",
-  String $test = lookup("vim::test"),
-  Array $packages = lookup("vim::packages", Array[String], 'unique'),
+  String $plugin      = $title,
+  String $group       = lookup("vim::group"),
+  String $user        = lookup("vim::user"),
+  String $home_dir    = "$home/${user}",
+  String $test        = lookup("vim::test"),
+  Array $requirements = lookup("vim::requirements", Array[String], 'first'),
+  Array $packages     = lookup("vim::packages", Array[String], 'first'),
 ) {
 
   #alert ("The idenity user is: $user")
   #alert ("The home: $home")
 
-  ensure_packages([ $packages ], {'ensure' => 'present'})
 
   yumrepo { 'mcepl-vim8' :
     name             => 'mcepl-vim8',
@@ -35,6 +35,14 @@ class vim(
     repo_gpgcheck    => 0,
     enabled          => 1,
   }
+
+  ensure_packages([ $requirements ], {'ensure' => 'present',} )
+  #ensure_packages([ $packages ], {'ensure' => 'latest',} )
+
+  #package { 'vim-enhanced-2:8.0.0600-1.1.24.el7.centos.x86_64' :
+  #  ensure =>  installed,
+
+
 
   file { "${home}/${user}/README.vim" :
     ensure => file,

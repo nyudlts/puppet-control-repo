@@ -17,12 +17,11 @@ mod 'puppetlabs/apache',
 
 mod 'flannon/archivesspace',
     :git => 'git://github.com/flannon/puppet-archivesspace.git',
-    :ref => '0.1.4'
-    #:ref => 'master'
+    :ref => 'd0.1.7'
 
 mod 'flannon/archivesspace_dev',
     :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
-    :ref => 'master'
+    :ref => 'd0.1.6'
 
 mod 'puppetlabs/firewall',
     :git => 'git://github.com/puppetlabs/puppetlabs-firewall.git',
