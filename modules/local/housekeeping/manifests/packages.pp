@@ -6,6 +6,7 @@ class housekeeping::packages (
   ensure_packages([
     'bzip2-devel',
     'bind-utils',
+    'deltarpm',
     'epel-release',
     'gdbm-devel',
     'gcc',
