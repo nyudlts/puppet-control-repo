@@ -10,19 +10,19 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class profiles::archivesspace {
+class profiles::webapp_archivesspace (
   $db_host     = lookup('archivesspace::db_host', String, 'first' ),
-  $db_name     = lookup(('archivesspace::db', String, 'first' ),
+  $db_name     = lookup('archivesspace::db_name', String, 'first' ),
   $db_passwd   = lookup('archivesspace::db_passwd', String, 'first' ),
   $db_user     = lookup('archivesspace::db_user', String, 'first' ),
   $fsid        = lookup('archivesspace::fsid', String, 'first' ),
-  $install_dir = lookup('$archivesspace::install_dir', String, 'first' ),
-  $plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision', 
+  $install_dir = lookup('archivesspace::install_dir', String, 'first' ),
+  $plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision'), 
   $plugin_marcxml_export_revision = lookup('archivesspace::plugin_marcxml_export_revision'),
   $plugin_sso_revision = lookup('archivesspace::plugin_sso_revision'),
   $user        = lookup('archivesspace::user', String, 'first' ),
   $group       = lookup('archivesspace::group', String, 'first' ),
-  $region      = chop($ec2_placement_availability_zone),
+  #$region      = chop($ec2_placement_availability_zone),
 ) {
 
   #warning("this is the region: ${region}")
@@ -38,14 +38,14 @@ class profiles::archivesspace {
   #accounts::account { 'joe' : }
   #accounts::account { 'ekate' : }
 
-  # Addd dlib gourp to sudoers
+  # Addd dlib group to sudoers
   file_line { 'sudo_rule_nopw':
     path => '/etc/sudoers',
     line => '%dlib    ALL=(ALL)   NOPASSWD: ALL',
   }
 
   #include dltsyumrepo::dlts
-  #include dltsyumrepo::development
+  include dltsyumrepo::development
   ## Load hiera
   #include hiera
   ## Load the hieradata
@@ -69,74 +69,82 @@ class profiles::archivesspace {
   #  fsid    => $fsid,
   #  require => Class['housekeeping::nfs'],
   #}->
+
   #class { 'archivesspace::install':
+  
+  include archivesspace
+
   #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],
   #}
 
-  # Make sur ethe solr_home directory tree exists
-  $solr_home = [ "${install_dir}/data/solr_home",
-                "${install_dir}/data/solr_home/collection1",
-                "${install_dir}/data/solr_home/collection1/conf",
-              ]
+  ##
+  #  Make sure the solr_home directory tree exists
+  #    -- Should this actually be in the modules install class? Yes
+  ##
+  #$solr_home = [ "${install_dir}/data/solr_home",
+  #              "${install_dir}/data/solr_home/collection1",
+  #              "${install_dir}/data/solr_home/collection1/conf",
+  #            ]
+  #
+  #file { $solr_home:
+  #  ensure  => 'directory',
+  #  owner   => $user,
+  #  group   => $user,
+  #  mode    => '0700',
+  #  #require => Class['archivesspace::install'],
+  #  #notify  => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
+  #}
 
-  file { $solr_home:
-    ensure  => 'directory',
-    owner   => $user,
-    group   => $user,
-    mode    => '0700',
-    require => Class['archivesspace::install'],
-    notify  => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
-  }
   ##
   #  Load plugins
   ##
-  archivesspace::plugin { 'nyu_marcxml_export_plugin' :
-    ensure          => 'present',
-    plugin          => 'nyu_marcxml_export_plugin',
-    plugin_source   => 'https://github.com/NYULibraries/nyu_marcxml_export_plugin.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-    plugin_revision => $plugin_marcxml_export_revision,
-    require         => Class['archivesspace::install'],
-  }
-  archivesspace::plugin { 'nyu_ead_export_plugin' :
-    ensure          => 'present',
-    plugin          => 'nyu_ead_export_plugin',
-    plugin_source   => 'https://github.com/NYULibraries/nyu_ead_export_plugin.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-    plugin_revision => $plugin_ead_export_revision,
-    require         => Class['archivesspace::install'],
-  }
-  archivesspace::plugin { 'hudmol_digitization_work_order' :
-    ensure          => 'present',
-    plugin          => 'digitization_work_order',
-    plugin_source   => 'https://github.com/hudmol/digitization_work_order.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-    plugin_revision => 'master',
-    require         => Class['archivesspace::install'],
-  }
-  archivesspace::plugin { 'nyu_sso_plugin' :
-    ensure          => present,
-    plugin          => 'nyu_sso_plugin',
-    plugin_source   => 'https://github.com/NYULibraries/nyu_sso_plugin.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-    plugin_revision => $plugin_sso_revision,
-    require         => Class['archivesspace::install'],
-  }
-  exec { 'initialize-plugin.sh nyu_sso_plugin' :
-    cwd     => "${install_dir}/plugins/nyu_sso_plugin",
-    command => "${install_dir}/scripts/initialize-plugin.sh nyu_sso_plugin",
-    timeout => 2600,
-    creates => "${install_dir}/plugins/.initialize-nyu_sso_plugin-complete",
-    require => Archivesspace::Plugin['nyu_sso_plugin'],
-    notify  => File["${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete"],
-  }->
-  class { 'archivesspace::service' : }
-  file { "${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete" :
-    ensure  => present,
-    content => 'nyu_sso_plugin gems installed.',
-    owner   => $user,
-    group   => $group,
-  }
+  #archivesspace::plugin { 'nyu_marcxml_export_plugin' :
+  #  ensure          => 'present',
+  #  plugin          => 'nyu_marcxml_export_plugin',
+  #  plugin_source   => 'https://github.com/NYULibraries/nyu_marcxml_export_plugin.git',
+  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
+  #  plugin_revision => $plugin_marcxml_export_revision,
+  #  require         => Class['archivesspace::install'],
+  #}
+  #archivesspace::plugin { 'nyu_ead_export_plugin' :
+  #  ensure          => 'present',
+  #  plugin          => 'nyu_ead_export_plugin',
+  #  plugin_source   => 'https://github.com/NYULibraries/nyu_ead_export_plugin.git',
+  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
+  #  plugin_revision => $plugin_ead_export_revision,
+  #  require         => Class['archivesspace::install'],
+  #}
+  #archivesspace::plugin { 'hudmol_digitization_work_order' :
+  #  ensure          => 'present',
+  #  plugin          => 'digitization_work_order',
+  #  plugin_source   => 'https://github.com/hudmol/digitization_work_order.git',
+  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
+  #  plugin_revision => 'master',
+  #  require         => Class['archivesspace::install'],
+  #}
+  #archivesspace::plugin { 'nyu_sso_plugin' :
+  #  ensure          => present,
+  #  plugin          => 'nyu_sso_plugin',
+  #  plugin_source   => 'https://github.com/NYULibraries/nyu_sso_plugin.git',
+  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
+  #  plugin_revision => $plugin_sso_revision,
+  #  require         => Class['archivesspace::install'],
+  #}
+  #exec { 'initialize-plugin.sh nyu_sso_plugin' :
+  #  cwd     => "${install_dir}/plugins/nyu_sso_plugin",
+  #  command => "${install_dir}/scripts/initialize-plugin.sh nyu_sso_plugin",
+  #  timeout => 2600,
+  #  creates => "${install_dir}/plugins/.initialize-nyu_sso_plugin-complete",
+  #  require => Archivesspace::Plugin['nyu_sso_plugin'],
+  #  notify  => File["${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete"],
+  #}->
+  #class { 'archivesspace::service' : }
+  #file { "${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete" :
+  #  ensure  => present,
+  #  content => 'nyu_sso_plugin gems installed.',
+  #  owner   => $user,
+  #  group   => $group,
+  #}
   firewall { '100 allow http and https access':
     dport  => [ 80, 8080, 8081, 8089, 8090, 8091 ],
     proto  => tcp,
@@ -152,15 +160,15 @@ class profiles::archivesspace {
     toports => 8080,
   }
   # set up the db
-  include profiles::db_mysql
-  mysql::db { 'asdb' :
-    user     => $db_user,
-    password => $db_passwd,
-    dbname   => 'asdb',
-    host     => 'localhost',
-    grant    => [ 'ALL' ],
-    #notify   => Class['archivesspace'],
-  }
+  #include profiles::db_mysql
+  #mysql::db { 'asdb' :
+  #  user     => $db_user,
+  #  password => $db_passwd,
+  #  dbname   => $db_name,
+  #  host     => 'localhost',
+  #  grant    => [ 'ALL' ],
+  #  #notify   => Class['archivesspace'],
+  #}
   include mysql::client
   include mysql::bindings
   include pyenv
