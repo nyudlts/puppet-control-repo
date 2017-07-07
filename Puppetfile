@@ -74,7 +74,7 @@ mod 'NYULibraries/loris',
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
-    :tag => '3.8.0'
+    :tag => '3.11.0'
 
 mod 'voxpupuli/nodejs',
   :git => 'git://github.com/voxpupuli/puppet-nodejs',
