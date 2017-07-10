@@ -45,6 +45,7 @@ class profiles::webapp_archivesspace (
   }
 
   #include dltsyumrepo::dlts
+  include dltsyumrepo::el7::test
   include dltsyumrepo::development
   ## Load hiera
   #include hiera
