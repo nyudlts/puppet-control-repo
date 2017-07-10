@@ -1,5 +1,5 @@
 #
-class profiles::aspace_dev {
+class profiles::dev_aspace_devenv {
   $install_dir = hiera('archivesspace_dev::install_dir', '/opt/archivesspace')
   $revision    = hiera('archivesspace_dev::revision', 'master')
   $source      = hiera('archivesspace_dev::source')
