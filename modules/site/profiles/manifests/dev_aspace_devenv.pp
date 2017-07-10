@@ -1,12 +1,12 @@
 #
 class profiles::dev_aspace_devenv {
-  $install_dir = hiera('archivesspace_dev::install_dir', '/opt/archivesspace')
-  $revision    = hiera('archivesspace_dev::revision', 'master')
-  $source      = hiera('archivesspace_dev::source')
-  $user        = hiera('archivesspace_dev::user', 'vagrant')
-  $asdb_name   = hiera('mysql::asdb_name', 'asdb')
-  $asdb_passwd = hiera('mysql::asdv_passwd', 'aspace')
-  $asdb_user   = hiera('mysql::asdb_user', 'asdb')
+  String $install_dir = lookup('archivesspace_devenv::install_dir')
+  String $revision    = lookup('archivesspace_devenv::revision')
+  String $source      = lookup('archivesspace_devenv::source')
+  String $user        = lookup('archivesspace_devenv::user')
+  String $asdb_name   = lookup('mysql::asdb_name', 'asdb')
+  String $asdb_passwd = lookup('mysql::asdv_passwd', 'aspace')
+  String $asdb_user   = lookup('mysql::asdb_user', 'asdb')
 
   firewall { '100 allow http and https access':
       dport   => [3000, 3100, 4567, 8080, 8081,  8089, 8090, 8091 ],
