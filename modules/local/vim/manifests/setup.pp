@@ -18,8 +18,8 @@ define vim::setup(
   String $vimrc = "$home/${title}/.vimrc"
 ){
 
-  alert("vim::home - $home")
-  alert("vim::positon - $position")
+  #alert("vim::home - $home")
+  #alert("vim::positon - $position")
 
   #file_line { 'alias_vi' :
   #  ensure => present,
@@ -27,13 +27,13 @@ define vim::setup(
   #  line   => 'alias vi=vim',
   #}
 
-  file_line { 'scl_source devtoolset-4' :
-    ensure => present,
-    path   => "${home}/${title}/.bashrc",
-    line   => '#source scl_source enable devtoolset-4',
-  }
+  #file_line { 'scl_source devtoolset-4' :
+  #  ensure => present,
+  #  path   => "${home}/${title}/.bashrc",
+  #  line   => '#source scl_source enable devtoolset-4',
+  #}
   
-  alert("From the defined type: $title")
+  #alert("From the defined type: $title")
 
   file { "${home}/${title}/.vim" :
     ensure  => directory,
