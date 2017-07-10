@@ -20,7 +20,7 @@ mod 'flannon/archivesspace',
     :ref => 'd0.1.7'
 
 mod 'flannon/archivesspace_devenv',
-    :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
+    :git => 'git://github.com/flannon/puppet-archivesspace_devenv.git',
     :ref => 'd0.1.6'
 
 mod 'puppetlabs/firewall',
