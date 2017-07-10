@@ -8,7 +8,7 @@ class profiles::dev_aspace_devenv(
   String $asdb_passwd = lookup('archivesspace_devenv::asdb_passwd', String, 'first'),
   String $asdb_user   = lookup('archivesspace_devenv::asdb_user', String, 'first'),
 ) {
-  firewall { '100 allow http and https access':
+  firewall { '100 archivesspace_devenv port access':
       dport   => [3000, 3100, 4567, 8080, 8081,  8089, 8090, 8091 ],
       proto   => tcp,
       action  => accept,
