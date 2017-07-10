@@ -1,13 +1,13 @@
 #
-class profiles::dev_aspace_devenv {
-  String $install_dir = lookup('archivesspace_devenv::install_dir')
-  String $revision    = lookup('archivesspace_devenv::revision')
-  String $source      = lookup('archivesspace_devenv::source')
-  String $user        = lookup('archivesspace_devenv::user')
-  String $asdb_name   = lookup('mysql::asdb_name', 'asdb')
-  String $asdb_passwd = lookup('mysql::asdv_passwd', 'aspace')
-  String $asdb_user   = lookup('mysql::asdb_user', 'asdb')
-
+class profiles::dev_aspace_devenv(
+  String $install_dir = lookup('archivesspace_devenv::install_dir'),
+  String $revision    = lookup('archivesspace_devenv::revision'),
+  String $source      = lookup('archivesspace_devenv::source'),
+  String $user        = lookup('archivesspace_devenv::user'),
+  String $asdb_name   = lookup('mysql::asdb_name', 'asdb'),
+  String $asdb_passwd = lookup('mysql::asdv_passwd', 'aspace'),
+  String $asdb_user   = lookup('mysql::asdb_user', 'asdb'),
+) {
   firewall { '100 allow http and https access':
       dport   => [3000, 3100, 4567, 8080, 8081,  8089, 8090, 8091 ],
       proto   => tcp,
