@@ -5,7 +5,7 @@ class profiles::dev_aspace_devenv(
   String $source      = lookup('archivesspace_devenv::source', String, 'first'),
   String $user        = lookup('archivesspace_devenv::user', String, 'first'),
   String $asdb_name   = lookup('archivesspace_devenv::asdb_name', String, 'first'),
-  String $asdb_passwd = lookup('archivesspace_devenv::aspace', String, 'first'),
+  String $asdb_passwd = lookup('archivesspace_devenv::asdb_passwd', String, 'first'),
   String $asdb_user   = lookup('archivesspace_devenv::asdb_user', String, 'first'),
 ) {
   firewall { '100 allow http and https access':
