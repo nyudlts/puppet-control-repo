@@ -19,7 +19,7 @@ mod 'flannon/archivesspace',
     :git => 'git://github.com/flannon/puppet-archivesspace.git',
     :ref => 'd0.1.7'
 
-mod 'flannon/archivesspace_dev',
+mod 'flannon/archivesspace_devenv',
     :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
     :ref => 'd0.1.6'
 

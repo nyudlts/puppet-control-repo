@@ -18,7 +18,7 @@ class profiles::dev_aspace_devenv {
   class { 'java':
     package => 'java-1.8.0-openjdk-devel',
   }
-  class { 'archivesspace_dev' :
+  class { 'archivesspace_devenv' :
       install_dir => $install_dir,
       revision    => $revision,
       source      => $source,
