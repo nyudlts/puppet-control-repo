@@ -4,9 +4,9 @@ class profiles::dev_aspace_devenv(
   String $revision    = lookup('archivesspace_devenv::revision'),
   String $source      = lookup('archivesspace_devenv::source'),
   String $user        = lookup('archivesspace_devenv::user'),
-  String $asdb_name   = lookup('mysql::asdb_name', 'asdb'),
-  String $asdb_passwd = lookup('mysql::asdv_passwd', 'aspace'),
-  String $asdb_user   = lookup('mysql::asdb_user', 'asdb'),
+  String $asdb_name   = lookup('archivesspace_devenv', 'asdb'),
+  String $asdb_passwd = lookup('archivesspace_devenv', 'aspace'),
+  String $asdb_user   = lookup('archivesspace_devenv', 'asdb'),
 ) {
   firewall { '100 allow http and https access':
       dport   => [3000, 3100, 4567, 8080, 8081,  8089, 8090, 8091 ],
