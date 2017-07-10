@@ -25,7 +25,6 @@ class profiles::dev_container {
 
   include vim
   vim::setup{ "vagrant" :}
-  #vim::ycm{ "vagrant" :}
   vim::plugin{ 'flazz/vim-colorschemes' : }
     #  user  => 'vagrant',
     #group => 'vagrant',
@@ -43,17 +42,12 @@ class profiles::dev_container {
   vim::plugin{ 'Valloric/YouCompleteMe': }
   vim::plugin{ 'L9': }
 
-  #ensure_packages(['golang'], {'ensure' => 'present'})
-
   class { 'java' :
     package => 'java-1.8.0-openjdk-devel',
   }
 
   include maven
 
-  #package { 'centos-release-scl':
-  #  ensure => installed,
-  #}
   class { 'python':
     version    => 'system',
     pip        => 'present',
@@ -94,6 +88,10 @@ class profiles::dev_container {
   #    #housekeeping::goenv{ $userhome : }
   #  }
   #}
+
+  include dltsyumrepo::el7::test
+  include dltsyumrepo::test
+  include dltsyumrepo::development
   include golang
 
 
