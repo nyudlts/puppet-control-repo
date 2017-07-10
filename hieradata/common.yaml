@@ -6,22 +6,12 @@ loris::source_images: '/content/dev/images'
 profiles::img_loris::fsid: 'fs-9c63e7d5'
 puppetcron::environment: 'production'
 puppetcron::ensure: 'present'
-
-
-#classifier::extra_classes:
-#  - <classes>
-#classifier::rules:
-#  OSX Workstations:
-#    match: all
-#    rules:
-#      - fact : "%{facts.os.family}"
-#        operator: ==
-#        value: Darwin
-#      - fact: "%{facts.is_virtual}"
-#        operator: ==
-#        value: "false"
-#      data:
-#        mac_pro: true
-#      classes:
-#        - stdlib
-#        - roles::kenny
+archivesspace_dev::install_dir: '/opt/archivesspace'
+archivesspace_dev::revision: 'v2.0.1'
+archivesspace_dev::source: 'https://github.com/archivesspace/archivesspace.git'
+archivesspace_dev::user: 'vagrant'
+archivesspace_dev::mysql_asdb_passwd: 'aspace'
+mysql::asdb_name: 'asdb'
+mysql::asdb_passwd: 'aspace'
+mysql::asdb_user: 'asdb'
+mysql::root_passwd: 'vagrant'
