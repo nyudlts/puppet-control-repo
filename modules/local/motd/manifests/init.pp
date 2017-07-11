@@ -9,7 +9,7 @@ class motd {
     'virtualbox': { 
         file { "/etc/motd":
             ensure => file,
-            source => "puppet:///modules/motd/motd.virtualbox",
+            source => "puppet:///modules/motd/motd.vagrant",
         }
      }
     'xenu': { 
