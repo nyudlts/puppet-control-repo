@@ -73,6 +73,7 @@ class profiles::webapp_archivesspace (
 
   #class { 'archivesspace::install':
   
+  include archivesspace::database
   include archivesspace
 
   #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],

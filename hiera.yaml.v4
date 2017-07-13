@@ -1,9 +1,0 @@
---
-version: 4
-datadir: "hieradata"
-hierarchy:
-  - name: "%{trusted.certname}"
-    backend: "yaml"
-  - name: "common"
-  backend: "yaml"
-
