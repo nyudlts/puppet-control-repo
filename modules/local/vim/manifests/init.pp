@@ -44,7 +44,7 @@ class vim(
 
 
 
-  file { "${home}/${user}/README.vim" :
+  file { "${home}/${user}/.README.vim" :
     ensure => file,
     owner  => $user,
     group  =>  $user,
