@@ -6,6 +6,12 @@ class motd {
             source => "puppet:///modules/motd/motd.vagrant",
         }
      }
+    'virtualbox': { 
+        file { "/etc/motd":
+            ensure => file,
+            source => "puppet:///modules/motd/motd.vagrant",
+        }
+     }
     'xenu': { 
         file { "/etc/motd":
             ensure => file,

@@ -12,6 +12,7 @@ class housekeeping::packages (
     'gcc',
     'gcc-c++',
     'git',
+    'htop',
     'libffi-devel',
     'libxslt-devel',
     'libyaml-devel',

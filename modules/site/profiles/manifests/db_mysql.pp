@@ -1,9 +1,4 @@
 class profiles::db_mysql {
-  firewall { '100 allow http and https access':
-      dport   => 3306,
-      proto   => tcp,
-      action  => accept,
-  }
   include housekeeping
   #include java
 
@@ -21,5 +16,10 @@ class profiles::db_mysql {
     dbname   => 'vagrant',
     host     => 'localhost',
     grant    => [ 'ALL' ],
+  }
+  firewall { '100 allow mysql port access':
+      dport   => 3306,
+      proto   => tcp,
+      action  => accept,
   }
 }

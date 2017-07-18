@@ -19,8 +19,8 @@ mod 'flannon/archivesspace',
     :git => 'git://github.com/flannon/puppet-archivesspace.git',
     :ref => 'd0.1.7'
 
-mod 'flannon/archivesspace_dev',
-    :git => 'git://github.com/flannon/puppet-archivesspace_dev.git',
+mod 'flannon/archivesspace_devenv',
+    :git => 'git://github.com/flannon/puppet-archivesspace_devenv.git',
     :ref => 'd0.1.6'
 
 mod 'puppetlabs/firewall',
@@ -74,7 +74,7 @@ mod 'NYULibraries/loris',
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
-    :tag => '3.8.0'
+    :tag => '3.11.0'
 
 mod 'voxpupuli/nodejs',
   :git => 'git://github.com/voxpupuli/puppet-nodejs',
