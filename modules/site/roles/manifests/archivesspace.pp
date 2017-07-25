@@ -13,6 +13,7 @@
 class roles::archivesspace {
 
     include profiles::base
+    include profiles::db_mysql
     include profiles::webapp_archivesspace
 
 }
