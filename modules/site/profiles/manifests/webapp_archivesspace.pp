@@ -15,7 +15,6 @@ class profiles::webapp_archivesspace (
   $db_name     = lookup('archivesspace::db_name', String, 'first' ),
   $db_passwd   = lookup('archivesspace::db_passwd', String, 'first' ),
   $db_user     = lookup('archivesspace::db_user', String, 'first' ),
-  $fsid        = lookup('archivesspace::fsid', String, 'first' ),
   $install_dir = lookup('archivesspace::install_dir', String, 'first' ),
   $plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision'), 
   $plugin_marcxml_export_revision = lookup('archivesspace::plugin_marcxml_export_revision'),
