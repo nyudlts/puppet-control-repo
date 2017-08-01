@@ -23,9 +23,9 @@ class profiles::webapp_archivesspace (
   $plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision'), 
   $plugin_marcxml_export_revision = lookup('archivesspace::plugin_marcxml_export_revision'),
   $plugin_sso_revision = lookup('archivesspace::plugin_sso_revision'),
-  $user        = lookup('archivesspace::user', String, 'first' ),
-  $group       = lookup('archivesspace::group', String, 'first' ),
-  #$region      = chop($ec2_placement_availability_zone),
+  $user                = lookup('archivesspace::user', String, 'first' ),
+  $group               = lookup('archivesspace::group', String, 'first' ),
+  #$region             = chop($ec2_placement_availability_zone),
 ) {
 
   #warning("this is the region: ${region}")

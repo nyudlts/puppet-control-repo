@@ -6,14 +6,15 @@ loris::source_images: '/content/dev/images'
 profiles::img_loris::fsid: 'fs-9c63e7d5'
 puppetcron::environment: 'production'
 puppetcron::ensure: 'present'
-#archivesspace::version: '2.0.0-2.el7.centos'
-#archivesspace::version: '2.0.1-2.el7.centos'
+archivesspace::version: '2.0.0-2.el7.centos'
 archivesspace::version: '2.1.0-1.el7.centos'
 archivesspace::install_dir: "/opt/archivesspace"
 archivesspace::conf_dir: "%{install_dir}/config"
 #archivesspace::conf_file: "%{conf_dir}/config.rb"
 archivesspace::conf_file: "/opt/archivesspace/config/config.rb"
 archivesspace::plugin_install_dir: "%{install_dir}/plugins"
+archivesspace::user: 'aspace'
+archivesspace::group: 'aspace'
 archivesspace::db_host: 'poly-asdb-0.caa7arvvnl9h.us-east-1.rds.amazonaws.com'
 archivesspace::db_passwd: 'letmein#poly'
 archivesspace::db_name: 'asdb'
@@ -22,4 +23,3 @@ archivesspace::plugin_install_dir: '/opt/archivesspace/plugins'
 archivesspace::plugin_marcxml_export_revision: 'production'
 archivesspace::plugin_ead_export_revision: 'production'
 archivesspace::plugin_sso_revision: 'production'
-
