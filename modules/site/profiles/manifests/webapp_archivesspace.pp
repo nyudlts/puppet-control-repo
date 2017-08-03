@@ -16,7 +16,6 @@ class profiles::webapp_archivesspace (
   $db_name     = lookup('archivesspace::db_name', String, 'first' ),
   $db_passwd   = lookup('archivesspace::db_passwd', String, 'first' ),
   $db_user     = lookup('archivesspace::db_user', String, 'first' ),
-  $fsid        = lookup('archivesspace::fsid', String, 'first' ),
   $ensure             = lookup('archivesspace::ensure', String, 'first'),
   $plugin_install_dir = lookup('archivesspace::plugin_install_dir', String, 'first'),
 
@@ -69,12 +68,7 @@ class profiles::webapp_archivesspace (
   #  group  => $user,
   #  mode   => '0755',
   #}
-  #efsmount::mount_volume { '/opt/archivesspace/data/solr_backups' :
-  #  fsid    => $fsid,
-  #  require => Class['housekeeping::nfs'],
-  #}->
 
-  #class { 'archivesspace::install':
   
   include archivesspace::database
   include archivesspace
