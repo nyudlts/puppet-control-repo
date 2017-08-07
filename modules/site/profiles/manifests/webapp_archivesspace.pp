@@ -33,7 +33,7 @@ class profiles::webapp_archivesspace (
   }
   #accounts::account { 'esha' : }
   #accounts::account { 'don' : }
-  accounts::account { 'flannon' : }
+  #accounts::account { 'flannon' : }
   #accounts::account { 'joe' : }
   #accounts::account { 'ekate' : }
 
