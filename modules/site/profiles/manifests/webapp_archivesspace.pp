@@ -70,6 +70,7 @@ class profiles::webapp_archivesspace (
   #}
 
   
+  include profiles::db_mysql
   include archivesspace::database
   include archivesspace
 
