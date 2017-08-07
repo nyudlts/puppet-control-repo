@@ -13,6 +13,7 @@ archivesspace::install_dir: "/opt/archivesspace"
 archivesspace::conf_dir: "%{install_dir}/config"
 archivesspace::conf_file: "%{conf_dir}/config.rb"
 #archivesspace::conf_file: "/opt/archivesspace/config/config.rb"
+archivesspace::java_heap_max: '-Xmx2048m'
 archivesspace::plugin_install_dir: "%{install_dir}/plugins"
 archivesspace::user: 'aspace'
 archivesspace::group: 'aspace'
