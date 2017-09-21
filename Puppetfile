@@ -76,6 +76,10 @@ mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
     :tag => '3.11.0'
 
+mod 'voxpupuli/nginx',
+  :git => 'git://github.com/voxpupuli/nginx',
+  :tag => 'v0.7.1'
+
 mod 'voxpupuli/nodejs',
   :git => 'git://github.com/voxpupuli/puppet-nodejs',
   :tag => 'v3.0.0'
