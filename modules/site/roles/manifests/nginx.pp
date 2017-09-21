@@ -35,9 +35,8 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class roles::apache {
+class roles::nginx {
 
     include profiles::base
-    include profiles::web_apache
-
+    include profiles::web_nginx
 }
