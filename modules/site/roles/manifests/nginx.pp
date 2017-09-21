@@ -39,4 +39,5 @@ class roles::nginx {
 
     include profiles::base
     include profiles::web_nginx
+    include profiles::dev_developer
 }
