@@ -88,7 +88,7 @@ class profiles::dev_developer {
   include dltsyumrepo::el7::test
   include dltsyumrepo::test
   include dltsyumrepo::development
-  include golang
+  #include golang
 
 
   $statements = ['this', 'is', 'the', 'last']
