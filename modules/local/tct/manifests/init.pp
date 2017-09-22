@@ -19,8 +19,10 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class tct {
-  include tct::install
-  include tct::install::backend
-  include tct::install::nginx
-  include tct::install::frontend
+  alert("Alert - tct module ")
+  crit("Crit - tct module ")
+  #include tct::install
+  #include tct::install::backend
+  #include tct::install::nginx
+  #include tct::install::frontend
 }
