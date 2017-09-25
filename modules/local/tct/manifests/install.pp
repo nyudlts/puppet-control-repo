@@ -19,24 +19,26 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class tct::install (
-  $backend       = $tct::params::backend,
-  $frontend      = $tct::params::frontend,
-  $install_dir   = $tct::params::install_dir,
-  $user          = $tct::params::user,
-  $venv          = $tct::params::venv,
-  $secret_key    = $tct::params::secret_key,
-  $basname       = $tct::params::basename,
-  $baseurl       = $tct::params::baseurl,
-  $www_dir       = $tct::params::www_dir,
-  $allowed_hosts = $tct::params::allowed_hosts,
-  $static_root   = $tct::params::static_root,
-  $media_root    = $tct::params::media_root,
-  $epubs_src_folder = $tct::params::epubs_src_folder,
-  $tct_db        = $tct::params::tct_db,
-  $db_host       = $tct::params::db_host,
-  $db_password   = $tct::params::db_password,
-  $db_user       = $tct::params::db_user,
-) inherits tct::params {
+  String $allowed_hosts    = lookup('tct::allowed_hosts', String, 'first'),
+  String $backend          = lookup('tct::backend', String, 'first'),
+  String $backend_revision = lookup('tct::backend_revision', String, 'first'),
+  String $basname          = lookup('tct::basename', String, 'first'),
+  String $baseurl          = lookup('tct::baseurl', String, 'first'),
+  String $db_host          = lookup('tct::db_host', String, 'first'),
+  String $db_password      = lookup('tct::db_password', String, 'first'),
+  String $db_user          = lookup('tct::db_user', String, 'first'),
+  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
+  String $frontend         = lookup('tct::frontend', String, 'first'),
+  String $frontend_revision = lookup('tct::backend_revision', String, 'first'),
+  String $install_dir      = lookup('tct::install_dir', String, 'first'),
+  String $media_root       = lookup('tct::media_root', String, 'first'),
+  String $user             = lookup('tct::user', String, 'first'),
+  String $secret_key       = lookup('tct::secret_key', String, 'first'),
+  String $www_dir          = lookup('tct::www_dir', String, 'first'),
+  String $static_root      = lookup('tct::static_root', String, 'first'),
+  String $tct_db           = lookup('tct::tct_db', String, 'first'),
+  String $venv             = lookup('tct::venv', String, 'first'),
+ ){
 
   # Add the user
   user { $user :
@@ -55,18 +57,19 @@ class tct::install (
   }
 
   # Install the repos
+  alert('Install backend repo')
   vcsrepo { "${install_dir}/${backend}":
     ensure   => present,
     provider => git,
     source   => "https://github.com/NYULibraries/${backend}",
-    revision => $revision,
+    revision => $backend_revision,
   }
-  #vcsrepo { "${install_dir}/${frontend}":
-  #  ensure   => present,
-  #  provider => git,
-  #  source   => "https://github.com/NYULibraries/${frontend}",
-  #  revision => $revision,
-  #}
+  vcsrepo { "${install_dir}/${frontend}":
+    ensure   => present,
+    provider => git,
+    source   => "https://github.com/NYULibraries/${frontend}",
+    revision => $frontend_revision,
+  }
 
   # Setup python
   ensure_packages(['python34', 'python34-devel', 'python34-pip'], {'ensure' => 'present'})
@@ -118,7 +121,7 @@ class tct::install (
     virtualenv => $venv,
     owner      => 'root',
     timeout    => 1800,
-    require    => Class['postgresql::server'],
+    #require    => Class['postgresql::server'],
   }
   python::pip { 'uwsgi':
     ensure     => latest,
@@ -127,41 +130,41 @@ class tct::install (
     owner      => 'root',
     timeout    =>  1800,
   }
-  file { "requirements.txt" :
-    #path   => "/home/${user}/src/requirements.txt",
-    ensure => present,
-    path   => "${venv}/requirements.txt",
-    owner  => 'root',
-    group  => 'root',
-    mode   => "0644",
-    source => "puppet:///modules/tct/requirements.txt",
-  }
-  python::requirements { "${venv}/requirements.txt":
-    virtualenv => $venv,
-    owner      => 'root',
-    group      => 'root',
-    require    => Python::Virtualenv["${venv}"],
-  }
-  file { 'requirements-documentation.txt':
-    ensure => present,
-    path   => "${venv}/requirements-documentaiton.txt",
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => "puppet:///modules/tct/requirements-documentation.txt",
-  }
-  python::requirements { "${venv}/requirements-documentation.txt":
-    virtualenv => $venv,
-    owner      => 'root',
-    group      => 'root',
-    require    => Python::Virtualenv["${venv}"],
-  }
-  file { "requirements-testing.txt" :
-    ensure => present,
-    path   => "${venv}/requirements-testing.txt",
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => "puppet:///modules/tct/requirements-testing.txt",
-  }
+  #file { "requirements.txt" :
+  #  #path   => "/home/${user}/src/requirements.txt",
+  #  ensure => present,
+  #  path   => "${venv}/requirements.txt",
+  #  owner  => 'root',
+  #  group  => 'root',
+  #  mode   => "0644",
+  #  source => "puppet:///modules/tct/requirements.txt",
+  #}
+  #python::requirements { "${venv}/requirements.txt":
+  #  virtualenv => $venv,
+  #  owner      => 'root',
+  #  group      => 'root',
+  #  require    => Python::Virtualenv["${venv}"],
+  #}
+  #file { 'requirements-documentation.txt':
+  #  ensure => present,
+  #  path   => "${venv}/requirements-documentaiton.txt",
+  #  owner  => 'root',
+  #  group  => 'root',
+  #  mode   => '0644',
+  #  source => "puppet:///modules/tct/requirements-documentation.txt",
+  #}
+  #python::requirements { "${venv}/requirements-documentation.txt":
+  #  virtualenv => $venv,
+  #  owner      => 'root',
+  #  group      => 'root',
+  #  require    => Python::Virtualenv["${venv}"],
+  #}
+  #file { "requirements-testing.txt" :
+  #  ensure => present,
+  #  path   => "${venv}/requirements-testing.txt",
+  #  owner  => 'root',
+  #  group  => 'root',
+  #  mode   => '0644',
+  #  source => "puppet:///modules/tct/requirements-testing.txt",
+  #}
 }
