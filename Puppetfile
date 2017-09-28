@@ -89,7 +89,7 @@ mod 'puppetlabs/ntp',
     :tag => '6.0.0'
 
 mod 'puppetlabs/postgresql',
-  :git => 'git://github.com/puppetlabs/puppetlabs-apache',
+  :git => 'git://github.com/puppetlabs/puppetlabs-postgresql',
   :tag => '5.1.0'
 
 mod 'stankevich/python',
