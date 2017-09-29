@@ -122,7 +122,7 @@ mod 'voxpupuli/staging',
 
 mod 'puppetlabs/stdlib',
   :git => 'git://github.com/puppetlabs/puppetlabs-stdlib',
-  :tag => '4.15.0'
+  :tag => '4.20.0'
 
 mod 'petems/swap_file',
   :git => 'git://github.com/petems/petems-swap_file',
