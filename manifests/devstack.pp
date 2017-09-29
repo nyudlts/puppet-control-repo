@@ -1,3 +1,3 @@
 node default {
-  include roles::devstacks
+  include roles::devstack
 }
