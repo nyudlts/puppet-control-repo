@@ -28,7 +28,7 @@ define golang::env {
     line => 'export PATH=$GOPATH/bin:%GOROOT/bin:$PATH',
   }
   $godirs = [
-              "${userhome}/go}", 
+              "${userhome}/go", 
               "${userhome}/go/bin", 
               "${userhome}/go/pkg", 
               "${userhome}/go/src", 

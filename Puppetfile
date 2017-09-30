@@ -116,13 +116,17 @@ mod 'voxpupuli/selinux',
   :git => 'git://github.com/voxpupuli/puppet-selinux',
   :tag => 'v1.1.0'
 
+mod 'saz/sudo',
+  :git => 'git://github.com/saz/puppet-sudo',
+  :tag => 'v4.2.0'
+
 mod 'voxpupuli/staging',
   :git => 'git://github.com/voxpupuli/puppet-staging',
   :tag => 'v1.0.7'
 
 mod 'puppetlabs/stdlib',
   :git => 'git://github.com/puppetlabs/puppetlabs-stdlib',
-  :tag => '4.15.0'
+  :tag => '4.20.0'
 
 mod 'petems/swap_file',
   :git => 'git://github.com/petems/petems-swap_file',

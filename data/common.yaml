@@ -8,7 +8,7 @@ puppetcron::ensure: 'present'
 #archivesspace::version: '2.0.0-2.el7.centos'
 #archivesspace::version: '2.0.1-2.el7.centos'
 #archivesspace::version: '2.1.0-1.el7.centos'
-archivesspace::version: '2.1.0-2.el7.centos'
+archivesspace::version: '2.1.2-2.el7.centos'
 archivesspace::install_dir: "/opt/archivesspace"
 archivesspace::conf_dir: "%{install_dir}/config"
 archivesspace::conf_file: "%{conf_dir}/config.rb"
@@ -19,6 +19,13 @@ archivesspace::user: 'aspace'
 archivesspace::group: 'aspace'
 archivesspace::db_name: 'asdb'
 archivesspace::db_user: 'aspace'
+archivesspace::enable_backend: "true"
+archivesspace::enable_frontend: "true"
+archivesspace::enable_public: "false"
+archivesspace::enable_solr: "true"
+archivesspace::enable_indexer: "true"
+archivesspace::enable_docs: "false"
+archivesspace::enable_oai: "false"
 archivesspace::plugin_install_dir: '/opt/archivesspace/plugins'
 archivesspace::plugin_marcxml_export_revision: 'production'
 archivesspace::plugin_ead_export_revision: 'production'
