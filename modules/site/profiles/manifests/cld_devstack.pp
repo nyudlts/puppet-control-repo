@@ -33,7 +33,7 @@ class profiles::cld_devstack (
     ensure  => file,
     owner   => 'root',
     group   => 'root',
-    mode    => 0440,
+    mode    => '0440',
     content => 'stack ALL=(ALL) NOPASSWD: ALL'
   }
 
