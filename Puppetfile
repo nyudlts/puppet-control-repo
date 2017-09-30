@@ -116,6 +116,10 @@ mod 'voxpupuli/selinux',
   :git => 'git://github.com/voxpupuli/puppet-selinux',
   :tag => 'v1.1.0'
 
+mod 'saz/sudo',
+  :git => 'git://github.com/saz/puppet-sudo',
+  :tag => 'v4.2.0'
+
 mod 'voxpupuli/staging',
   :git => 'git://github.com/voxpupuli/puppet-staging',
   :tag => 'v1.0.7'
