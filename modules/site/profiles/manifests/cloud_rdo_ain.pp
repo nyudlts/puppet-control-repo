@@ -37,6 +37,6 @@ class profiles::cloud_rdo_ain (
   #  content => 'stack ALL=(ALL) NOPASSWD: ALL'
   #}
 
-  #include devstack
+  include rdo_aio
 
 }
