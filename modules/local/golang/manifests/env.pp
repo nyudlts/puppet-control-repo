@@ -1,5 +1,8 @@
 #
 define golang::env {
+
+  $user = $title
+
   if $title == 'root' {
     $userhome = "/${title}"
   }
