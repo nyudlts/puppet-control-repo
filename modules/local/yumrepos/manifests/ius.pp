@@ -10,9 +10,9 @@ class yumrepos::ius {
   }
 
     yumrepo { 'ius.repo' :
-      name            => 'IUS Community Packages for Enterprise Linux 7 - $basearch'
+      name            => 'ius',
       ensure          => present,
-      descr           => 'ius',
+      descr           => 'IUS Community Packages for Enterprise Linux 7 - $basearch',
       baseurl         => 'https://dl.iuscommunity.org/pub/ius/stable/CentOS/7/$basearch',
       mirrorlist      => 'https://mirrors.iuscommunity.org/mirrorlist?repo=ius-centos7&arch=$basearch&protocol=http',
       enabled         => 1,
