@@ -90,8 +90,8 @@ class profiles::dev_container {
   #}
 
   include dltsyumrepo::el7::test
-  include dltsyumrepo::test
-  include dltsyumrepo::development
+  #include dltsyumrepo::test
+  #include dltsyumrepo::development
   include golang
 
 

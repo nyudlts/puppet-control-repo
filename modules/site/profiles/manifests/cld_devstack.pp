@@ -23,5 +23,20 @@ class profiles::cld_devstack (
     gid    => '200',
   }
 
+  user { "stack":
+    ensure     => present,
+    managehome => true,
+    comment    =>  'Fat stacks',
+  }
+
+  file { '/etc/sudoers.d/stack':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0440',
+    content => 'stack ALL=(ALL) NOPASSWD: ALL'
+  }
+
+  include devstack
 
 }

@@ -15,7 +15,7 @@ class profiles::container_kbmaster {
 
 
   include housekeeping
-  include dltsyumrepo::development
+  #include dltsyumrepo::development
 
   # Add default group and users
   group { 'dlib' :
