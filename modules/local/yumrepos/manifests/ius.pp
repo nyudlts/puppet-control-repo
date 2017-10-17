@@ -6,7 +6,8 @@ class yumrepos::ius {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'https://github.com/iuscommunity-pkg/ius-release/blob/master/SOURCES/IUS-COMMUNITY-GPG-KEY',
+    #source => 'https://github.com/iuscommunity-pkg/ius-release/SOURCES/IUS-COMMUNITY-GPG-KEY',
+    source => 'https://raw.githubusercontent.com/iuscommunity-pkg/ius-release/master/SOURCES/IUS-COMMUNITY-GPG-KEY',
   }
 
     yumrepo { 'ius.repo' :
@@ -18,7 +19,7 @@ class yumrepos::ius {
       enabled         => 1,
       failovermethod  => 'priority',
       protect         => 0,
-      gpgcheck        => 1,
+      gpgcheck        => 0,
       metadata_expire => '30',
     }
 }
