@@ -70,7 +70,7 @@ mod 'yo61/logrotate',
 
 mod 'NYULibraries/loris',
     :git => 'git://github.com/NYULibraries/puppet-loris',
-    :tag => 'v0.1.6'
+    :tag => 'dev0.1.8'
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
