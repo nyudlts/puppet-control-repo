@@ -55,6 +55,7 @@ class profiles::base {
       hierarchy       => [
                           { 'name' => 'Per-node data (yaml version)', 'path' => 'nodes/%{trusted.certname}.yaml'},
                           { 'name' => 'Other yaml hierarchy levels', 'paths' => ['location/%{facts.whereami}/%{facts.group}.yaml', 'os/%{facts.os.family}.yaml', 'accounts.yaml', 'common.yaml']},
+                        ],
       require => User['puppet'],
     }
     include housekeeping
