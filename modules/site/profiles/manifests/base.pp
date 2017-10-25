@@ -54,9 +54,8 @@ class profiles::base {
       hiera5_defaults => {'datadir' => 'data', 'data_hash' =>  'yaml_data'},
       hierarchy       => [
                           { 'name' => 'Per-node data (yaml version)', 'path' => 'nodes/%{trusted.certname}.yaml'},
-                          {'name' => 'Other yaml hierarchy levels"', 'paths' => ['location/%{facts.whereami}/%{facts.group}.yaml', 'os/%{facts.os.family}.yaml', 'accounts.yaml', 'common.yaml'},
-      ],
-      require                                              => User['puppet'],
+                          { 'name' => 'Other yaml hierarchy levels', 'paths' => ['location/%{facts.whereami}/%{facts.group}.yaml', 'os/%{facts.os.family}.yaml', 'accounts.yaml', 'common.yaml']},
+      require => User['puppet'],
     }
     include housekeeping
     class { 'localtime':
