@@ -8,10 +8,7 @@ hierarchy:
 
   - name: "Other yaml hierarch levels"
     paths:  # Can specifiy an array of paths insted of just one.
-      - "location/%{facts.whereami}/%{facts.group}.yaml"
-      - "groups/%{facts.group}.yaml"
       - "os/%{facts.os.family}.yaml"
-      - "classes.yaml"
       - "accounts.yaml"
       - "common.yaml"
 

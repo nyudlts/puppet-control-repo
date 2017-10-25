@@ -54,7 +54,7 @@ mod 'n1tr0g/gnupg',
 
 mod 'voxpupuli/hiera',
         :git => 'https://github.com/voxpupuli/puppet-hiera.git',
-        :tag => 'v2.4.0'
+        :tag => 'v3.3.0'
 
 mod 'puppetlabs/inifile',
     :git => 'git://github.com/puppetlabs/puppetlabs-inifile.git',
