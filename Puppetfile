@@ -29,7 +29,7 @@ mod 'puppetlabs/firewall',
 
 mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
-  :tag => '2.2.0'
+  :tag => '4.1.0'
 
 #mod 'fj5/dlib_apache_tlon',
 #    :git => 'git://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
@@ -90,7 +90,7 @@ mod 'puppetlabs/ntp',
 
 mod 'puppetlabs/postgresql',
   :git => 'git://github.com/puppetlabs/puppetlabs-postgresql',
-  :tag => '5.1.0'
+  :tag => '5.2.0'
 
 mod 'stankevich/python',
     :git => 'git://github.com/stankevich/puppet-python',
