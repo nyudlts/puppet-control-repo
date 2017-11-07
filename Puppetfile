@@ -116,9 +116,9 @@ mod 'voxpupuli/selinux',
   :git => 'git://github.com/voxpupuli/puppet-selinux',
   :tag => 'v1.1.0'
 
-mod 'saz/sudo',
-  :git => 'git://github.com/saz/puppet-sudo',
-  :tag => 'v4.2.0'
+#mod 'saz/sudo',
+#  :git => 'git://github.com/saz/puppet-sudo',
+#  :tag => 'v4.2.0'
 
 mod 'voxpupuli/staging',
   :git => 'git://github.com/voxpupuli/puppet-staging',
@@ -135,6 +135,9 @@ mod 'petems/swap_file',
 mod 'puppetlabs/vcsrepo',
     :git => 'git://github.com/puppetlabs/puppetlabs-vcsrepo',
     :tag => '1.3.2'
+
+mod 'NYULibraries/tct',
+  :git => 'git://github.com/NYULibraries/puppet-tct'
 
 mod 'puppetlabs/tomcat',
     :git => 'git://github.com/puppetlabs/puppetlabs-tomcat',
