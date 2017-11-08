@@ -82,7 +82,7 @@ mod 'voxpupuli/nginx',
 
 mod 'voxpupuli/nodejs',
   :git => 'git://github.com/voxpupuli/puppet-nodejs',
-  :tag => 'v3.0.0'
+  :tag => 'v4.0.0'
 
 mod 'puppetlabs/ntp',
     :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
