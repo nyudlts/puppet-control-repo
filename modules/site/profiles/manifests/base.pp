@@ -40,14 +40,23 @@ class profiles::base {
       ensure => present,
     }
     include ::gnupg
+    #class { 'hiera':
+    #  hierarchy => [
+    #    '%{environment}/%{calling_class}',
+    #    '%{environment}',
+    #    'accounts',
+    #    'common',
+    #  ],
+    #  require   => User['puppet'],
+    #}
     class { 'hiera':
-      hierarchy => [
-        '%{environment}/%{calling_class}',
-        '%{environment}',
-        'accounts',
-        'common',
-      ],
-      require   => User['puppet'],
+      hiera_version   => '5',
+      hiera5_defaults => {'datadir' => 'data', 'data_hash' =>  'yaml_data'},
+      hierarchy       => [
+                          { 'name' => 'Per-node data (yaml version)', 'path' => 'nodes/%{trusted.certname}.yaml'},
+                          { 'name' => 'Other yaml hierarchy levels', 'paths' => ['location/%{facts.whereami}/%{facts.group}.yaml', 'groups/%{facts.group}.yaml', 'os/%{facts.os.family}.yaml', 'accounts.yaml', 'common.yaml']},
+                        ],
+      require => User['puppet'],
     }
     include housekeeping
     class { 'localtime':

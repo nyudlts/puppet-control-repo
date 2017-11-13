@@ -29,7 +29,7 @@ mod 'puppetlabs/firewall',
 
 mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
-  :tag => '2.2.0'
+  :tag => '4.1.0'
 
 #mod 'fj5/dlib_apache_tlon',
 #    :git => 'git://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
@@ -54,7 +54,7 @@ mod 'n1tr0g/gnupg',
 
 mod 'voxpupuli/hiera',
         :git => 'https://github.com/voxpupuli/puppet-hiera.git',
-        :tag => 'v2.4.0'
+        :tag => 'v3.3.0'
 
 mod 'puppetlabs/inifile',
     :git => 'git://github.com/puppetlabs/puppetlabs-inifile.git',
@@ -70,7 +70,7 @@ mod 'yo61/logrotate',
 
 mod 'NYULibraries/loris',
     :git => 'git://github.com/NYULibraries/puppet-loris',
-    :tag => 'v0.1.6'
+    :tag => 'dev0.1.8'
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
@@ -82,7 +82,7 @@ mod 'voxpupuli/nginx',
 
 mod 'voxpupuli/nodejs',
   :git => 'git://github.com/voxpupuli/puppet-nodejs',
-  :tag => 'v3.0.0'
+  :tag => 'v4.0.0'
 
 mod 'puppetlabs/ntp',
     :git => 'git://github.com/puppetlabs/puppetlabs-ntp',
@@ -90,11 +90,11 @@ mod 'puppetlabs/ntp',
 
 mod 'puppetlabs/postgresql',
   :git => 'git://github.com/puppetlabs/puppetlabs-postgresql',
-  :tag => '5.1.0'
+  :tag => '5.2.0'
 
 mod 'stankevich/python',
     :git => 'git://github.com/stankevich/puppet-python',
-    :tag => '1.14.0'
+    :tag => '1.18.2'
 
 mod 'zack/r10k',
     :git => 'git://github.com/acidprime/r10k',
@@ -116,9 +116,9 @@ mod 'voxpupuli/selinux',
   :git => 'git://github.com/voxpupuli/puppet-selinux',
   :tag => 'v1.1.0'
 
-mod 'saz/sudo',
-  :git => 'git://github.com/saz/puppet-sudo',
-  :tag => 'v4.2.0'
+#mod 'saz/sudo',
+#  :git => 'git://github.com/saz/puppet-sudo',
+#  :tag => 'v4.2.0'
 
 mod 'voxpupuli/staging',
   :git => 'git://github.com/voxpupuli/puppet-staging',
@@ -135,6 +135,9 @@ mod 'petems/swap_file',
 mod 'puppetlabs/vcsrepo',
     :git => 'git://github.com/puppetlabs/puppetlabs-vcsrepo',
     :tag => '1.3.2'
+
+mod 'NYULibraries/tct',
+  :git => 'git://github.com/NYULibraries/puppet-tct'
 
 mod 'puppetlabs/tomcat',
     :git => 'git://github.com/puppetlabs/puppetlabs-tomcat',
