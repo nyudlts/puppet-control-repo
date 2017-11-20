@@ -25,4 +25,22 @@ class profiles::svc_nfs_server {
     'nfs4-acl-tools' => { ensure => present },
   }, { 'ensure' => 'present' } )
 
+  file_line { 'export_nfs1' :
+    path => '/etc/export/',
+    line =>  '/nfs1  192.168.250.11(rw,sync,fsid=0)',
+  }
+
+  service { 'nfs' :
+    enable =>  true,
+    ensure => running,
+  }
+    
+  firewall { '100 allow nfs access on 2049' :
+    dport  => [2049,],
+    proto  => tcp,
+    action => accept,
+    source => '192.168.250.11',
+  }
+
+
 }
