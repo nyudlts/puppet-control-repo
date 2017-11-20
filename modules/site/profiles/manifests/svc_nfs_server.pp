@@ -23,7 +23,7 @@ class profiles::svc_nfs_server {
     'nfs-utils',
     'portmap',
     'nfs4-acl-tools',
-  ],{ 'ensure' => 'present' } ]
+  ],{ 'ensure' => 'present' } )
   
 
 }
