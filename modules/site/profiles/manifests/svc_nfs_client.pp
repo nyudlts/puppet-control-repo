@@ -56,7 +56,7 @@ class profiles::svc_nfs_client {
   file_line { '/etc/fstab' :
     path =>  '/etc/fstab',
     #line => '192.168.250.10:/ /data nfs4 soft,intr,rsize=8192,wsize=8192,nosuid',
-    line => '192.168.250.10:/ /data nfs4 sec=sys,noatime 0 0',
+    line => '192.168.250.10:/data /data nfs4 sec=sys,noatime 0 0',
   }
 
   service { 'nfs' :
