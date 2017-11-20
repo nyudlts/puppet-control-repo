@@ -21,7 +21,7 @@ class profiles::svc_nfs_server {
 
   ensure_packages([
     'nfs-utils',
-    'portmap',
+    'rpcbind',
     'nfs4-acl-tools',
   ],{ 'ensure' => 'present' } )
   
