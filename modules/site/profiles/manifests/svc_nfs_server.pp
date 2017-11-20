@@ -26,7 +26,7 @@ class profiles::svc_nfs_server {
   }, { 'ensure' => 'present' } )
 
   file_line { 'export_nfs1' :
-    path => '/etc/export/',
+    path => '/etc/exports/',
     line =>  '/nfs1  192.168.250.11(rw,sync,fsid=0)',
   }
 
