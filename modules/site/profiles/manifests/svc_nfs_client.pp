@@ -27,6 +27,11 @@ class profiles::svc_nfs_client {
     'nfs4-acl-tools' => { ensure => present },
   }, { 'ensure' => 'present' } )
 
+  file_line { '/etc/hosts' :
+    path => '/etc/hosts',
+    line =>  '192.168.250.10 nfs-server.local',
+  }
+
   file_line { 'local_domain' :
     ensure => present,
     path   => '/etc/idmapd.conf',
