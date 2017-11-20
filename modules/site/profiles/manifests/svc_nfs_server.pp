@@ -35,6 +35,11 @@ class profiles::svc_nfs_server {
     ensure => running,
   }
     
+  file_line { '/etc/hosts' :
+    path => '/etc/hosts/',
+    line =>  '192.168.250.11 nfs-client.local',
+  }
+
   firewall { '100 allow nfs access on 2049' :
     dport  => [2049,],
     proto  => tcp,
