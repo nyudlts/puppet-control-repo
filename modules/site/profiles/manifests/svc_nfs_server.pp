@@ -23,7 +23,6 @@ class profiles::svc_nfs_server {
     'nfs-utils'      => { ensure => present },
     'rpcbind'        => { ensure => '0.2.0-42' },
     'nfs4-acl-tools' => { ensure => presnt },
-  ],{ 'ensure' => 'present' } }
-  
+  }, { 'ensure' => 'present' } )
 
 }
