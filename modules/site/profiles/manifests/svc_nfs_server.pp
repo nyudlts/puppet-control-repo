@@ -25,14 +25,6 @@ class profiles::svc_nfs_server {
     'nfs4-acl-tools' => { ensure => present },
   }, { 'ensure' => 'present' } )
 
-  file_line { 'export_nfs1' :
-    path => '/etc/exports',
-    line =>  '/nfs1  192.168.250.0/24(ro,no_subtree_check,fsid=0,crossmnt)',
-  }
-  file_line { 'export_share' :
-    path => '/etc/exports',
-    line =>  '/nfs1/share  192.168.250.0/24(rw,no_subtree_check,no_root_squach)',
-  }
   file { '/exports' :
     ensure => directory,
     owner  => 'root',
@@ -44,6 +36,14 @@ class profiles::svc_nfs_server {
     owner  => 'root',
     group  => 'root',
     mode   => '0777',
+  }
+  file_line { 'export_volume' :
+    path => '/etc/exports',
+    line =>  '/exports  192.168.250.0/24(ro,no_subtree_check,fsid=0,crossmnt)',
+  }
+  file_line { 'export_directory' :
+    path => '/etc/exports',
+    line =>  '/exports/data  192.168.250.0/24(rw,no_subtree_check,no_root_squach)',
   }
 
   file_line { 'fstab_01' :
