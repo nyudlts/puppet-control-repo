@@ -19,5 +19,11 @@ class profiles::svc_nfs_server {
     gid    => '200',
   }
 
+  ensure_packages([
+    'nfs-utils',
+    'portmap',
+    'nfs4-acl-tools',
+  ],{ 'ensure' => 'present' } ]
+  
 
 }
