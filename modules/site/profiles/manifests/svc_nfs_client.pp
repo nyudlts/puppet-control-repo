@@ -53,10 +53,6 @@ class profiles::svc_nfs_client {
     group  => 'dlib',
     mode   => '0775',
   }
-  file_line { '/etc/hosts' :
-    path => '/etc/hosts/',
-    line =>  '192.168.250.10 nfs-server.local',
-  }
   file_line { '/etc/fstab' :
     path =>  '/etc/fstab',
     #line => '192.168.250.10:/ /data nfs4 soft,intr,rsize=8192,wsize=8192,nosuid',
