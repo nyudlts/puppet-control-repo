@@ -56,7 +56,7 @@ class profiles::svc_nfs_server {
   }
     
   file_line { '/etc/hosts' :
-    path => '/etc/hosts/',
+    path => '/etc/hosts',
     line =>  '192.168.250.11 nfs-client.local',
   }
 
