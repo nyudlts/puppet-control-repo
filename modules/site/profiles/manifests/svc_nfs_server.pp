@@ -27,9 +27,29 @@ class profiles::svc_nfs_server {
 
   file_line { 'export_nfs1' :
     path => '/etc/exports',
-    line =>  '/nfs1  192.168.250.11(rw,sync,fsid=0)',
+    line =>  '/nfs1  192.168.250.0/24(ro,no_subtree_check,fsid=0,crossmnt)',
+  }
+  file_line { 'export_share' :
+    path => '/etc/exports',
+    line =>  '/nfs1/share  192.168.250.0/24(rw,no_subtree_check,no_root_squach)',
+  }
+  file { '/exports' :
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0777',
+  }
+  file { '/exports/data' :
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0777',
   }
 
+  file_line { 'fstab_01' :
+    path => '/etc/fstab',
+    line => '/data  /exports/data  none  bind  0 0',
+  }
   service { 'nfs' :
     enable =>  true,
     ensure => running,
@@ -41,7 +61,7 @@ class profiles::svc_nfs_server {
   }
 
   firewall { '100 allow nfs access on 2049' :
-    dport  => [2049,],
+    dport  => [111, 662, 892, 1039, 1047, 1048, 2049, 32803, 38467, 32769],
     proto  => tcp,
     action => accept,
     source => '192.168.250.11',
