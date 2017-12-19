@@ -147,19 +147,20 @@ class profiles::webapp_archivesspace (
   #  group   => $group,
   #}
   firewall { '100 allow http and https access':
-    dport  => [ 80, 8080, 8081, 8089, 8090, 8091 ],
+    dport  => [ 80, 8080, 8081, 8082, 8089, 8090, 8091 ],
     proto  => tcp,
     action => accept,
   }
-  firewall { '102 forward port 80 to 8080':
-    table   => 'nat',
-    chain   => 'PREROUTING',
-    iniface => 'eth0',
-    proto   => 'tcp',
-    dport   => '80',
-    jump    => 'REDIRECT',
-    toports => 8080,
-  }
+  #firewall { '102 forward port 80 to 8080':
+  #  table   => 'nat',
+  #  chain   => 'PREROUTING',
+  #  iniface => 'eth0',
+  #  proto   => 'tcp',
+  #  dport   => '80',
+  #  jump    => 'REDIRECT',
+  #  toports => 8080,
+  #}
+
   # set up the db
   #include profiles::db_mysql
   #mysql::db { 'asdb' :
