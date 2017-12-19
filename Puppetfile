@@ -25,7 +25,7 @@ mod 'flannon/archivesspace_devenv',
 
 mod 'puppetlabs/firewall',
     :git => 'git://github.com/puppetlabs/puppetlabs-firewall.git',
-    :ref => '1.8.1'
+    :ref => '1.11.0'
 
 mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
