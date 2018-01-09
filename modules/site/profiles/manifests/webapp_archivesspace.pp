@@ -46,9 +46,15 @@ class profiles::webapp_archivesspace (
     line => '%dlib    ALL=(ALL)   NOPASSWD: ALL',
   }
 
+  if ($facts['os']['family'] == 'RedHat') and ($facts['os']['release']['major'] == '6') {
+    include dltsyumrepo::development
+  }
+  elsif ($facts['os']['family'] == 'RedHat') and ($facts['os']['release']['major'] == '7') {
+     include dltsyumrepo::el7::test
+  }
+
   #include dltsyumrepo::dlts
-  include dltsyumrepo::el7::test
-  include dltsyumrepo::development
+
   ## Load hiera
   #include hiera
   ## Load the hieradata
