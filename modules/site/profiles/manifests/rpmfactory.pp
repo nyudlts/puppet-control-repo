@@ -38,7 +38,7 @@
 class profiles::rpmfactory {
 
   include rpmbuilder
-  include gbp_rpm
+  #include gbp_rpm
   include vim
   vim::setup{ "vagrant" :}
   vim::plugin{ 'flazz/vim-colorschemes' : }
