@@ -12,7 +12,7 @@ mod 'camptocamp/accounts',
 
 mod 'puppetlabs/apache',
   :git => 'git://github.com/puppetlabs/puppetlabs-apache',
-  :tag => '1.11.0'
+  :tag => '2.3.0'
   #:tag => '1.10.0'
 
 mod 'flannon/archivesspace',
@@ -25,7 +25,7 @@ mod 'flannon/archivesspace_devenv',
 
 mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
-  :tag => '4.1.0'
+  :tag => '4.1.1'
 
 #mod 'fj5/dlib_apache_tlon',
 #    :git => 'git://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
