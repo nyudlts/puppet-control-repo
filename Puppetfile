@@ -74,7 +74,7 @@ mod 'NYULibraries/loris',
 
 mod 'puppetlabs/mysql',
     :git => 'git://github.com/puppetlabs/puppetlabs-mysql',
-    :tag => '5.1.0'
+    :tag => '5.2.0'
 
 mod 'voxpupuli/nginx',
   :git => 'git://github.com/voxpupuli/puppet-nginx',
