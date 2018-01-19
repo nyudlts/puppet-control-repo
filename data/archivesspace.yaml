@@ -13,7 +13,7 @@ archivesspace::plugin_ead_export_revision: 'production'
 archivesspace::plugin_sso_revision: 'production'
 archivesspace::plugin_conf: "AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'digitization_work_order\']"
 #archivesspace::db_host: 'acm-aspace-dev-cluster.cluster-caa7arvvnl9h.us-east-1.rds.amazonaws.com'
-archivesspace::db_passwd: 'letmein#acm'
+archivesspace::db_passwd: 'letmein'
 archivesspace::db_name: 'asdb'
 archivesspace::db_user: 'aspace'
 profiles::archivesspace_plugin_marcxml_export_revision: 'production'
