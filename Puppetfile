@@ -96,9 +96,9 @@ mod 'stankevich/python',
     :git => 'git://github.com/stankevich/puppet-python',
     :tag => '1.18.2'
 
-mod 'voxpupuli/r10k',
-    :git => 'git://github.com/voxpupuli/r10k',
-    :tag => 'v6.3.0'
+#mod 'voxpupuli/r10k',
+#    :git => 'git://github.com/voxpupuli/r10k',
+#    :tag => 'v6.3.0'
 
 mod 'jdowning/rbenv',
     :git => 'git://github.com/justindowning/puppet-rbenv',
