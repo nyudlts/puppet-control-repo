@@ -51,7 +51,7 @@ class profiles::poly::webapp_archivesspace (
   $plugin_install_dir = lookup('profiles::poly::plugin_install_dir', String, 'first'),
   $plugin_ensure   = lookup('profles::poly::plugin_ensure', String, 'first'),
   $plugin_prefix   = lookup('profiles::poly::plugin_prefix', String, 'first'),
-  $plugin_revision = lookup('profiles::poly::plugin_revison', String, 'first'),
+  $plugin_revision = lookup('profiles::poly::plugin_revision', String, 'first'),
   $plugin_source   = lookup('profiles::poly::plugin_source', String, 'first'),
   $plugin_marcxml_export_revision = lookup('profiles::poly::plugin_marcxml_export_revision', String, 'first'),
   $plugin_ead_export_revision     = lookup('profiles::poly::plugin_ead_export_revision', String, 'first'),
