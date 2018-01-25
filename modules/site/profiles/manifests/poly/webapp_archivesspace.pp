@@ -109,7 +109,42 @@ class profiles::poly::webapp_archivesspace (
   
   include profiles::db_mysql
   include archivesspace::database
-  include archivesspace
+  #include archivesspace
+  class  { archivesspace: 
+    ensure                         => $ensure, 
+    version                        => $version,
+    install_dir                    => $install_dir,
+    confi_dir                      => $conf_dir,
+    conf_file                      => $conf_file,
+    java_heap_max                  => $java_heap_max,
+    log_levels                     => $log_level,
+    enable_backend                 => $enable_backend,
+    enable_frontend                => $enable_frontend,
+    enable_public                  => $enable_public,
+    enable_solr                    => $enable_solr,
+    enable_indexer                 => $enable_indexer,
+    enable_docs                    => $enable_docs, 
+    enable_oai                     => $enable_oai,
+    fsdb                           => $fsdb,
+    user                           => $user,
+    group                          => $group,
+    db_passwd                      => $db_passwd,
+    db_name                        => $db_name,
+    db_user                        => $db_user,
+    db_host                        => $db_host,
+    plugin                         => $plugin,
+    plugin_conf                    => $plugin_conf,
+    plugin_install_dir             => $plugin_install_dir,
+    plugin_ensure                  => $plugin_ensure,
+    plugin_prefic                  => $plugin_prefix,
+    plugin_revision                => $plugin_revision,
+    plugin_source                  => $plugin_source,
+    plugin_marcxml_export_revision => $plugin_marcxml_export_revision,
+    plugin_ead_export_revision     => $plugin_ead_export_revision,
+    plugin_sso_revision            => $plugin_sso_revision, 
+) {
+  
+  }
 
   #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],
   #}
