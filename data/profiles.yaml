@@ -2,8 +2,8 @@
 message: "This node is using profiles data"
 profiles::poly::ensure: 'present'
 #archivesspace::ensure: 'present'
-profiles::poly::version: '1.5.1-2'
-#archivesspace::version: '2.2.2-1.el7.centos'
+#profiles::poly::version: '1.5.1-2'
+archivesspace::version: '2.2.2-1.el7.centos'
 profiles::poly::install_dir: "/opt/archivesspace"
 profiles::poly::conf_dir: "%{install_dir}/config"
 profiles::poly::conf_file: "%{conf_dir}/config.rb"
