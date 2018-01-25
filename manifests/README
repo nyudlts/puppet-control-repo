@@ -1,0 +1,2 @@
+If the manifest file anme has two workds use a - as the workd separator,
+not an _ .  This is necessary becaus ethe manifest file name is used to set the host name in Vagrnat.
