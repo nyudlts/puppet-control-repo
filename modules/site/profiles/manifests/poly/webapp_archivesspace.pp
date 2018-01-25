@@ -114,7 +114,7 @@ class profiles::poly::webapp_archivesspace (
     ensure                         => $ensure, 
     version                        => $version,
     install_dir                    => $install_dir,
-    confi_dir                      => $conf_dir,
+    conf_dir                       => $conf_dir,
     conf_file                      => $conf_file,
     java_heap_max                  => $java_heap_max,
     log_levels                     => $log_level,
