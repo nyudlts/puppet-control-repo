@@ -29,7 +29,7 @@ profiles::poly::plugin_conf: "AppConfig[:plugins] = [\'nyu_marcxml_export_plugin
 profiles::poly::plugin_install_dir: "%{install_dir}/plugins"
 profles::poly::plugin_ensure: 'present'
 profiles::poly::plugin_prefix: '^AppConfig[:plugins] ='
-profiles::poly::plugin_revison: 'production'
+profiles::poly::plugin_revision: 'production'
 profiles::poly::plugin_source: undef
 #archivesspace::plugin_source: undef
 profiles::poly::plugin_marcxml_export_revision: 'production'
