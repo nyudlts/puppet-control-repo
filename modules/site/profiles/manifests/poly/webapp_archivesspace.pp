@@ -110,6 +110,11 @@ class profiles::poly::webapp_archivesspace (
   include profiles::db_mysql
   include archivesspace::database
   #include archivesspace
+  alert("Version: $version")
+  notice("Version: $version")
+  alert("Version: $version")
+  notice("Version: $version")
+  alert("Version: $version")
   class  { archivesspace: 
     ensure                         => $ensure, 
     version                        => $version,
