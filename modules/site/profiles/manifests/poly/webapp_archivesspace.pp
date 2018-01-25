@@ -136,12 +136,12 @@ class profiles::poly::webapp_archivesspace (
     plugin_conf                    => $plugin_conf,
     plugin_install_dir             => $plugin_install_dir,
     plugin_ensure                  => $plugin_ensure,
-    plugin_prefic                  => $plugin_prefix,
+    plugin_prefix                  => $plugin_prefix,
     plugin_revision                => $plugin_revision,
     plugin_source                  => $plugin_source,
-    plugin_marcxml_export_revision => $plugin_marcxml_export_revision,
-    plugin_ead_export_revision     => $plugin_ead_export_revision,
-    plugin_sso_revision            => $plugin_sso_revision, 
+    #plugin_marcxml_export_revision => $plugin_marcxml_export_revision,
+    #plugin_ead_export_revision     => $plugin_ead_export_revision,
+    #plugin_sso_revision            => $plugin_sso_revision, 
   }
 
   #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],
