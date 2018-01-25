@@ -117,7 +117,7 @@ class profiles::poly::webapp_archivesspace (
     conf_dir                       => $conf_dir,
     conf_file                      => $conf_file,
     java_heap_max                  => $java_heap_max,
-    log_levels                     => $log_level,
+    log_level                      => $log_level,
     enable_backend                 => $enable_backend,
     enable_frontend                => $enable_frontend,
     enable_public                  => $enable_public,
