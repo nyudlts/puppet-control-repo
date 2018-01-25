@@ -11,51 +11,20 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class profiles::poly::webapp_archivesspace (
-  #$install_dir = lookup('archivesspace::install_dir', String, 'first' ),
-  #$db_host     = lookup('archivesspace::db_host', String, 'first' ),
-  #$db_name     = lookup('archivesspace::db_name', String, 'first' ),
-  #$db_passwd   = lookup('archivesspace::db_passwd', String, 'first' ),
-  #$db_user     = lookup('archivesspace::db_user', String, 'first' ),
-  #$ensure             = lookup('archivesspace::ensure', String, 'first'),
-  #$plugin_install_dir = lookup('archivesspace::plugin_install_dir', String, 'first'),
-  #
-  #$plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision'), 
-  #$plugin_marcxml_export_revision = lookup('archivesspace::plugin_marcxml_export_revision'),
-  #$plugin_sso_revision = lookup('archivesspace::plugin_sso_revision'),
-  #$user                = lookup('archivesspace::user', String, 'first' ),
-  #$group               = lookup('archivesspace::group', String, 'first' ),
-  ##$region             = chop($ec2_placement_availability_zone),
-  $ensure = lookup('archivesspace::ensure', String, 'first'),
-  $version        = lookup('profiles::poly::version', String, 'first'),
-  $install_dir    = lookup('profiles::poly::install_dir', String, 'first'),
-  $conf_dir       = lookup('profiles::poly::conf_dir', String, 'first'),
-  $conf_file      = lookup('profiles::poly::conf_file', String, 'first'),
-  $java_heap_max  = lookup('profiles::poly::java_heap_max', String, 'first'),
-  $log_level      = lookup('profiles::poly::log_level', String, 'first'),
-  $enable_backend = lookup('profiles::poly::enable_backend', String, 'first'),
-  $enable_frontend = lookup('profiles::poly::enable_frontend', String, 'first'),
-  $enable_public   = lookup('profiles::poly::enable_public', String, 'first'),
-  $enable_solr     = lookup('profiles::poly::enable_solr', String, 'first'),
-  $enable_indexer  = lookup('profiles::poly::enable_indexer', String, 'first'),
-  $enable_docs     = lookup('profiles::poly::enable_docs', String, 'first'),
-  $enable_oai      = lookup('profiles::poly::enable_oai', String, 'first'),
-  $fsdb            = lookup('profiles::poly::fsdb', String, 'first'),
-  $user            = lookup('profiles::poly::user', String, 'first'),
-  $group           = lookup('profiles::poly::group', String, 'first'),
-  $db_passwd       = lookup('profiles::poly::db_passwd', String, 'first'),
-  $db_name         = lookup('profiles::poly::db_name', String, 'first'),
-  $db_user         = lookup('profiles::poly::db_user', String, 'first'),
-  $db_host         = lookup('profiles::poly::db_host', String, 'first'),
-  $plugin          = lookup('profiles::poly::plugin', String, 'first'),
-  $plugin_conf     = lookup('profiles::poly::plugin_conf', String, 'first'),
-  $plugin_install_dir = lookup('profiles::poly::plugin_install_dir', String, 'first'),
-  $plugin_ensure   = lookup('profles::poly::plugin_ensure', String, 'first'),
-  $plugin_prefix   = lookup('profiles::poly::plugin_prefix', String, 'first'),
-  $plugin_revision = lookup('profiles::poly::plugin_revision', String, 'first'),
-  $plugin_source   = lookup('profiles::poly::plugin_source', String, 'first'),
-  $plugin_marcxml_export_revision = lookup('profiles::poly::plugin_marcxml_export_revision', String, 'first'),
-  $plugin_ead_export_revision     = lookup('profiles::poly::plugin_ead_export_revision', String, 'first'),
-  $plugin_sso_revision            = lookup('profiles::poly::plugin_sso_revision', String, 'first'),
+  $install_dir = lookup('archivesspace::install_dir', String, 'first' ),
+  $db_host     = lookup('archivesspace::db_host', String, 'first' ),
+  $db_name     = lookup('archivesspace::db_name', String, 'first' ),
+  $db_passwd   = lookup('archivesspace::db_passwd', String, 'first' ),
+  $db_user     = lookup('archivesspace::db_user', String, 'first' ),
+  $ensure             = lookup('archivesspace::ensure', String, 'first'),
+  $plugin_install_dir = lookup('archivesspace::plugin_install_dir', String, 'first'),
+
+  $plugin_ead_export_revision = lookup('archivesspace::plugin_ead_export_revision'), 
+  $plugin_marcxml_export_revision = lookup('archivesspace::plugin_marcxml_export_revision'),
+  $plugin_sso_revision = lookup('archivesspace::plugin_sso_revision'),
+  $user                = lookup('archivesspace::user', String, 'first' ),
+  $group               = lookup('archivesspace::group', String, 'first' ),
+  #$region             = chop($ec2_placement_availability_zone),
 ) {
 
   #warning("this is the region: ${region}")
@@ -109,45 +78,7 @@ class profiles::poly::webapp_archivesspace (
   
   include profiles::db_mysql
   include archivesspace::database
-  #include archivesspace
-  alert("Version: $version")
-  notice("Version: $version")
-  alert("Version: $version")
-  notice("Version: $version")
-  alert("Version: $version")
-  class  { archivesspace: 
-    ensure                         => $ensure, 
-    version                        => $version,
-    install_dir                    => $install_dir,
-    conf_dir                       => $conf_dir,
-    conf_file                      => $conf_file,
-    java_heap_max                  => $java_heap_max,
-    log_level                      => $log_level,
-    enable_backend                 => $enable_backend,
-    enable_frontend                => $enable_frontend,
-    enable_public                  => $enable_public,
-    enable_solr                    => $enable_solr,
-    enable_indexer                 => $enable_indexer,
-    enable_docs                    => $enable_docs, 
-    enable_oai                     => $enable_oai,
-    fsdb                           => $fsdb,
-    user                           => $user,
-    group                          => $group,
-    db_passwd                      => $db_passwd,
-    db_name                        => $db_name,
-    db_user                        => $db_user,
-    db_host                        => $db_host,
-    plugin                         => $plugin,
-    plugin_conf                    => $plugin_conf,
-    plugin_install_dir             => $plugin_install_dir,
-    plugin_ensure                  => $plugin_ensure,
-    plugin_prefix                  => $plugin_prefix,
-    plugin_revision                => $plugin_revision,
-    plugin_source                  => $plugin_source,
-    #plugin_marcxml_export_revision => $plugin_marcxml_export_revision,
-    #plugin_ead_export_revision     => $plugin_ead_export_revision,
-    #plugin_sso_revision            => $plugin_sso_revision, 
-  }
+  include archivesspace
 
   #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],
   #}
