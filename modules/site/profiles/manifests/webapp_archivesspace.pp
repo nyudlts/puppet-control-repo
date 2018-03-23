@@ -122,7 +122,7 @@ class profiles::webapp_archivesspace (
     db_passwd                      => $db_passwd,
     db_name                        => $db_name,
     db_user                        => $db_user,
-    db_host                        => $db_host,
+    #db_host                        => $db_host,
     plugin                         => $plugin,
     plugin_conf                    => $plugin_conf,
     plugin_install_dir             => $plugin_install_dir,
