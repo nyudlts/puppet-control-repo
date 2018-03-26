@@ -3,6 +3,8 @@ class housekeeping::packages (
     $user = $housekeeping::params::user
 ) inherits housekeeping::params {
 
+  ensure_packages(['eyaml'], {'ensure' => 'present', 'provider' => 'gem' })
+  
   ensure_packages([
     'bzip2-devel',
     'bind-utils',
@@ -28,7 +30,7 @@ class housekeeping::packages (
     'yum-utils',
     'zip',
     'zlib-devel',
-  ], {'ensure' => 'present'} )
+  ], {'ensure'                         => 'present'} )
 
     if ($facts['os']['family'] == 'RedHat') and ($facts['os']['release']['majo    r'] == '7') {
     ensure_packages([
