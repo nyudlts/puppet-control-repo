@@ -3,7 +3,7 @@ class housekeeping::packages (
     $user = $housekeeping::params::user
 ) inherits housekeeping::params {
 
-  ensure_packages(['eyaml'], {'ensure' => 'present', 'provider' => 'gem' })
+  ensure_packages(['hiera-eyaml'], {'ensure' => 'present', 'provider' => 'gem' })
   
   ensure_packages([
     'bzip2-devel',
