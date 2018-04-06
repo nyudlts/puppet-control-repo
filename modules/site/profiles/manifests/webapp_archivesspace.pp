@@ -11,7 +11,7 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class profiles::webapp_archivesspace (
-  $ensure = lookup('archivesspace::ensure', Boolean, 'first'),
+  $ensure         = lookup('archivesspace::ensure', String, 'first'),
   $version        = lookup('archivesspace::version', String, 'first'),
   $install_dir    = lookup('archivesspace::install_dir', String, 'first'),
   $conf_dir       = lookup('archivesspace::conf_dir', String, 'first'),
