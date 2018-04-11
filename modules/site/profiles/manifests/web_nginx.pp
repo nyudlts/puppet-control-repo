@@ -14,7 +14,7 @@ class profiles::web_nginx {
 
   include nginx
 
-  file { '/ect/nginx/nginx.conf' :
+  file { '/etc/nginx/nginx.conf' :
     ensure  => file,
     content => template('profiles/nginx.conf.erb')
   }
