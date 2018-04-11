@@ -14,10 +14,10 @@ class profiles::web_nginx {
 
   include nginx
 
-  file { '/etc/nginx/nginx.conf' :
-    ensure  => file,
-    content => template('profiles/nginx.conf.erb')
-  }
+  #file { '/etc/nginx/nginx.conf' :
+  #  ensure  => file,
+  #  content => template('profiles/nginx.conf.erb')
+  #}
 
   firewall { '100 allow apache access on 80' :
     #dport  => [80, 443, 5601, 8000, 8001, 8080],
