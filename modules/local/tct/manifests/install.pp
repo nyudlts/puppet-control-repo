@@ -42,6 +42,9 @@ class tct::install (
   String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
  ){
 
+  # Add third party package repos
+  ensure_packages(['::ius'], {'ensure' => 'present'})
+
   # Add the user
   user { $user :
     ensure     => present,
