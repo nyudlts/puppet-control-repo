@@ -60,6 +60,10 @@ mod 'puppetlabs/inifile',
     :git => 'git://github.com/puppetlabs/puppetlabs-inifile.git',
     :tag => '2.0.0'
 
+mod 'kemra102/ius',
+  :git => 'git://github.com/kemra102/puppet-ius.git',
+  :tag => 'v1.1.0'
+
 mod 'puppetlabs/java',
     :git => 'git://github.com/puppetlabs/puppetlabs-java',
     :tag => '2.2.0'
