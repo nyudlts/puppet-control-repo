@@ -77,7 +77,8 @@ class tct::install (
   }
 
   # Setup python
-  ensure_packages(['python34', 'python34-devel', 'python34-pip'], {'ensure' => 'present'})
+  #ensure_packages(['python34', 'python34-devel', 'python34-pip'], {'ensure' => 'present'})
+  ensure_packages(['python35u', 'python35u-devel', 'python35u-pip'], {'ensure' => 'present'})
   #ensure_packages(['centos-release-scl', 'python33'], 
   #                {'ensure'              => 'present'})
 
