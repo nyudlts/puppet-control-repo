@@ -21,14 +21,15 @@
 class tct::install (
   String $allowed_hosts    = lookup('tct::allowed_hosts', String, 'first'),
   String $backend          = lookup('tct::backend', String, 'first'),
+  String $backend_repo     = lookup('tct::backend_repo', String, 'first'),
   String $backend_revision = lookup('tct::backend_revision', String, 'first'),
   String $basname          = lookup('tct::basename', String, 'first'),
   String $baseurl          = lookup('tct::baseurl', String, 'first'),
   String $db_host          = lookup('tct::db_host', String, 'first'),
   String $db_password      = lookup('tct::db_password', String, 'first'),
   String $db_user          = lookup('tct::db_user', String, 'first'),
-  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
   String $frontend         = lookup('tct::frontend', String, 'first'),
+  String $frontend_repo    = lookup('tct::frontend_repo', String, 'first'),
   String $frontend_revision = lookup('tct::backend_revision', String, 'first'),
   String $install_dir      = lookup('tct::install_dir', String, 'first'),
   String $media_root       = lookup('tct::media_root', String, 'first'),
@@ -38,6 +39,7 @@ class tct::install (
   String $static_root      = lookup('tct::static_root', String, 'first'),
   String $tct_db           = lookup('tct::tct_db', String, 'first'),
   String $venv             = lookup('tct::venv', String, 'first'),
+  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
  ){
 
   # Add the user
@@ -61,13 +63,13 @@ class tct::install (
   vcsrepo { "${install_dir}/${backend}":
     ensure   => present,
     provider => git,
-    source   => "https://github.com/NYULibraries/${backend}",
+    source   => ${backend_repo},
     revision => $backend_revision,
   }
   vcsrepo { "${install_dir}/${frontend}":
     ensure   => present,
     provider => git,
-    source   => "https://github.com/NYULibraries/${frontend}",
+    source   => ${frontend_repo},
     revision => $frontend_revision,
   }
 
