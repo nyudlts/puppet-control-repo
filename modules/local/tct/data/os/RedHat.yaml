@@ -1,6 +1,7 @@
 ---
 tct::allowed_hosts: 'nyuapi.infoloom.nyc'
 tct::backend: "dlts-enm-tct-backend"
+tct::backend_repo: 'https://github.com/NYULibraries/dlts-enm-tct-backend'
 tct::backend_revision: "master"
 tct::basename: 'tct.home.wfc'
 tct::baseurl: "http://${basename}/"
@@ -8,6 +9,7 @@ tct::db_host: 'localhost'
 tct::db_password: 'cFHg*Liw45'
 tct::db_user: 'tctdb'
 tct::frontend: 'dlts-enm-tct-frontend'
+tct::frontend_repo: 'https://github.com/NYULibraries/dlts-enm-tct-frontend'
 tct::frontend_revision: 'master'
 tct::install_dir: '/opt/tct'
 tct::media_root: "/opt/tct/www/${basename}/media"
