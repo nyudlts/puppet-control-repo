@@ -63,13 +63,13 @@ class tct::install (
   vcsrepo { "${install_dir}/${backend}":
     ensure   => present,
     provider => git,
-    source   => ${backend_repo},
+    source   => $backend_repo,
     revision => $backend_revision,
   }
   vcsrepo { "${install_dir}/${frontend}":
     ensure   => present,
     provider => git,
-    source   => ${frontend_repo},
+    source   => $frontend_repo,
     revision => $frontend_revision,
   }
 
