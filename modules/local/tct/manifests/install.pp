@@ -43,7 +43,7 @@ class tct::install (
  ){
 
   # Add third party package repos
-  ensure_packages(['::ius'], {'ensure' => 'present'})
+  include ius
 
   # Add the user
   user { $user :
