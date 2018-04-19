@@ -26,9 +26,10 @@ class tct::install::backend (
   String $db_host       = lookup('tct::db_host', String, 'first'),
   String $db_password   = lookup('tct::db_password', String, 'first'),
   String $db_user       = lookup('tct::db_user', String, 'first'),
-  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
   String $frontend      = lookup('tct::frontend', String, 'first'),
   String $install_dir   = lookup('tct::install_dir', String, 'first'),
+  String $media_root    = lookup('tct::media_root', String, 'first'),
+  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
   String $pub_src       = lookup('tct::pub_src', String, 'first'),
   String $secret_key    = lookup('tct::secret_key', String, 'first'),
   String $static_root   = lookup('tct::static_root', String, 'first'),
@@ -36,7 +37,6 @@ class tct::install::backend (
   String $user          = lookup('tct::user', String, 'first'),
   String $venv          = lookup('tct::venv', String, 'first'),
   String $www_dir       = lookup('tct::www_dir', String, 'first'),
-  String $media_root    = lookup('tct::media_root', String, 'first'),
 ){
 
   # postgres
@@ -99,7 +99,7 @@ class tct::install::backend (
     mode   => '0777',
   }
 
-  # Hold hour nose, do the exec thing, and run the python installer,
+  # Hold our nose, do the exec thing, and run the python installer,
   #  python manage.py loaddata indexpatterns.json
   # see: dlts-enm-tct-backend/documentation/site/setup/index.html
 
