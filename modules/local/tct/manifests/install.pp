@@ -78,17 +78,19 @@ class tct::install (
 
   # Setup python
   #ensure_packages(['python34', 'python34-devel', 'python34-pip'], {'ensure' => 'present'})
-  ensure_packages(['python35u', 'python35u-devel', 'python35u-pip'], {'ensure' => 'present'})
   #ensure_packages(['centos-release-scl', 'python33'], 
   #                {'ensure'              => 'present'})
+  #ensure_packages(['python35u', 'python35u-devel', 'python35u-pip'], {'ensure' => 'present'})
+  #ensure_packages(['rh-python35', 'rh-python35-python-devel', 'rh-python35-python-pip'], {'ensure' => 'present'})
 
   class { 'python':
-    version    => 'system',
-    pip        => 'present',
-    dev        => 'present',
-    virtualenv => 'present',
-    gunicorn   => 'absent',
-    use_epel   => true,
+    version                     => 'rh-python35-python',
+    pip                         => 'present',
+    dev                         => 'present',
+    virtualenv                  => 'present',
+    gunicorn                    => 'absent',
+    use_epel                    => true,
+    rhscl_use_public_repository => true,
   }->
   python::pip { 'pip':
     ensure     => latest,
@@ -111,16 +113,16 @@ class tct::install (
     owner      => 'root',
     timeout    => 1800,
   }
-  python::virtualenv { $venv :
-    ensure     => present,
-    version    => '3',
-    systempkgs => true,
-    venv_dir   => $venv,
-    owner      => 'root',
-    group      => 'root',
-    timeout    => 0,
-    require => [ Class['python'], Package['python35u'] ],
-  }
+  #python::virtualenv { $venv :
+  #  ensure     => present,
+  #  version    => '3',
+  #  systempkgs => true,
+  #  venv_dir   => $venv,
+  #  owner      => 'root',
+  #  group      => 'root',
+  #  timeout    => 0,
+  #  require => [ Class['python'], Package['python35u'] ],
+  #}
   python::pip { 'psycopg2':
     ensure     => '2.7.1',
     pkgname    => 'psycopg2',
