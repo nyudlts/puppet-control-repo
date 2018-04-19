@@ -119,7 +119,7 @@ class tct::install (
     owner      => 'root',
     group      => 'root',
     timeout    => 0,
-    require => [ Class['python'], Package['python34'] ],
+    require => [ Class['python'], Package['python35u'] ],
   }
   python::pip { 'psycopg2':
     ensure     => '2.7.1',
