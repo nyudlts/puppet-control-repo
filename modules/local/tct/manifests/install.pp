@@ -157,12 +157,14 @@ class tct::install (
     mode   => "0644",
     source => "puppet:///modules/tct/requirements.txt",
   }
-  python::requirements { "${venv}/requirements.txt":
-    virtualenv => $venv,
-    owner      => 'root',
-    group      => 'root',
-    require    => Python::Pyvenv["${venv}"],
-  }
+  #python::requirements { "${venv}/requirements.txt":
+  #  virtualenv => $venv,
+  #  owner      => 'root',
+  #  group      => 'root',
+  #  #require    => Python::Pyvenv["${venv}"],
+  #  environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
+  #  require     => [ File['requirements.txt'], Python::Pyvenv["${venv}"], ],
+  #}
 
   # Documentation
   #file { 'requirements-documentation.txt':
