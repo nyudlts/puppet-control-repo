@@ -77,12 +77,7 @@ class tct::install (
   }
 
   # Setup python
-  #ensure_packages(['python34', 'python34-devel', 'python34-pip'], {'ensure' => 'present'})
-  #ensure_packages(['centos-release-scl', 'python33'], 
-  #                {'ensure'              => 'present'})
-  #ensure_packages(['python35u', 'python35u-devel', 'python35u-pip'], {'ensure' => 'present'})
-  #ensure_packages(['rh-python35', 'rh-python35-python-devel', 'rh-python35-python-pip'], {'ensure' => 'present'})
-
+  # Install python3.5 from the RH community editions
   class { 'python':
     version                     => 'rh-python35-python',
     pip                         => 'present',
@@ -91,6 +86,14 @@ class tct::install (
     gunicorn                    => 'absent',
     use_epel                    => true,
     rhscl_use_public_repository => true,
+  }->
+  file { 'rh-python35.sh' :
+    ensure  => file,
+    path    => '/etc/profile.d/rh-python35.sh',
+    content => template('tct/rh-python35.sh.erb',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
   }->
   python::pip { 'pip':
     ensure     => latest,
@@ -113,24 +116,29 @@ class tct::install (
     owner      => 'root',
     timeout    => 1800,
   }
-  #python::virtualenv { $venv :
-  #  ensure     => present,
-  #  version    => '3',
-  #  systempkgs => true,
-  #  venv_dir   => $venv,
-  #  owner      => 'root',
-  #  group      => 'root',
-  #  timeout    => 0,
-  #  require => [ Class['python'], Package['python35u'] ],
-  #}
-  python::pip { 'psycopg2':
-    ensure     => '2.7.1',
-    pkgname    => 'psycopg2',
-    virtualenv => $venv,
-    owner      => 'root',
-    timeout    => 1800,
-    #require    => Class['postgresql::server'],
+  python::pyvenv { $venv :
+    ensure      => present,
+    version     => '3.5',
+    systempkgs  => true,
+    venv_dir    => $venv,
+    owner       => 'root',
+    group       => 'root',
+    path        => '/opt/rh/rh-python35/root/bin/:/bin:/usr/bin:/usr/local/bin',
+    environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
+    require     => Class['python'],
   }
+  file { "${venv}/bin/pip" :
+    ensure => link,
+    target => '/opt/rh/rh-python35/root/bin/pip',
+  }
+  #python::pip { 'psycopg2':
+  #  ensure     => '2.7.1',
+  #  pkgname    => 'psycopg2',
+  #  virtualenv => $venv,
+  #  owner      => 'root',
+  #  timeout    => 1800,
+  #  #require    => Class['postgresql::server'],
+  #}
   python::pip { 'uwsgi':
     ensure     => latest,
     pkgname    => 'uwsgi',
@@ -138,21 +146,23 @@ class tct::install (
     owner      => 'root',
     timeout    =>  1800,
   }
-  #file { "requirements.txt" :
-  #  #path   => "/home/${user}/src/requirements.txt",
-  #  ensure => present,
-  #  path   => "${venv}/requirements.txt",
-  #  owner  => 'root',
-  #  group  => 'root',
-  #  mode   => "0644",
-  #  source => "puppet:///modules/tct/requirements.txt",
-  #}
-  #python::requirements { "${venv}/requirements.txt":
-  #  virtualenv => $venv,
-  #  owner      => 'root',
-  #  group      => 'root',
-  #  require    => Python::Virtualenv["${venv}"],
-  #}
+  file { "requirements.txt" :
+    #path   => "/home/${user}/src/requirements.txt",
+    ensure => present,
+    path   => "${venv}/requirements.txt",
+    owner  => 'root',
+    group  => 'root',
+    mode   => "0644",
+    source => "puppet:///modules/tct/requirements.txt",
+  }
+  python::requirements { "${venv}/requirements.txt":
+    virtualenv => $venv,
+    owner      => 'root',
+    group      => 'root',
+    require    => Python::Virtualenv["${venv}"],
+  }
+
+  # Documentation
   #file { 'requirements-documentation.txt':
   #  ensure => present,
   #  path   => "${venv}/requirements-documentaiton.txt",
@@ -167,6 +177,8 @@ class tct::install (
   #  group      => 'root',
   #  require    => Python::Virtualenv["${venv}"],
   #}
+
+  # Testing
   #file { "requirements-testing.txt" :
   #  ensure => present,
   #  path   => "${venv}/requirements-testing.txt",
