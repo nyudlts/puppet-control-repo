@@ -126,7 +126,7 @@ class tct::install (
     path        => '/opt/rh/rh-python35/root/bin/:/bin:/usr/bin:/usr/local/bin',
     environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
     require     => Class['python'],
-  }
+  }->
   file { "${venv}/bin/pip" :
     ensure => link,
     target => '/opt/rh/rh-python35/root/bin/pip',
@@ -137,6 +137,7 @@ class tct::install (
   #  virtualenv => $venv,
   #  owner      => 'root',
   #  timeout    => 1800,
+  #  environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
   #  #require    => Class['postgresql::server'],
   #}
   python::pip { 'uwsgi':
@@ -145,6 +146,7 @@ class tct::install (
     virtualenv => $venv,
     owner      => 'root',
     timeout    =>  1800,
+    environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
   }
   file { "requirements.txt" :
     #path   => "/home/${user}/src/requirements.txt",
@@ -159,7 +161,7 @@ class tct::install (
     virtualenv => $venv,
     owner      => 'root',
     group      => 'root',
-    require    => Python::Virtualenv["${venv}"],
+    require    => Python::Pyvenv["${venv}"],
   }
 
   # Documentation
