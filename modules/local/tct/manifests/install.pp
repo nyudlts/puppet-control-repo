@@ -90,7 +90,7 @@ class tct::install (
   file { 'rh-python35.sh' :
     ensure  => file,
     path    => '/etc/profile.d/rh-python35.sh',
-    content => template('tct/rh-python35.sh.erb',
+    content => template('tct/rh-python35.sh.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
