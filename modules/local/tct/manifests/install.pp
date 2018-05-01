@@ -81,12 +81,13 @@ class tct::install (
   #ensure_packages(['centos-release-scl', 'python33'], 
   #                {'ensure'              => 'present'})
   #ensure_packages(['python35u', 'python35u-devel', 'python35u-pip'], {'ensure' => 'present'})
+
   #ensure_packages(['rh-python35', 'rh-python35-python-devel', 'rh-python35-python-pip'], {'ensure' => 'present'})
 
   class { 'python':
     version                     => 'rh-python35-python',
     pip                         => 'present',
-    dev                         => 'present',
+    dev                         => 'latest',
     virtualenv                  => 'present',
     gunicorn                    => 'absent',
     use_epel                    => true,
@@ -113,31 +114,33 @@ class tct::install (
     owner      => 'root',
     timeout    => 1800,
   }
-  #python::virtualenv { $venv :
-  #  ensure     => present,
-  #  version    => '3',
-  #  systempkgs => true,
-  #  venv_dir   => $venv,
+  python::virtualenv { $venv :
+    ensure     => present,
+    #version    => 'rh-python35-python',
+    version    => '3.5',
+    systempkgs => true,
+    venv_dir   => $venv,
+    owner      => 'root',
+    group      => 'root',
+    timeout    => 0,
+    #require => [ Class['python'], Package['python35u'] ],
+  }
+  #python::pip { 'psycopg2':
+  #  ensure     => '2.7.1',
+  #  pkgname    => 'psycopg2',
+  #  virtualenv => $venv,
   #  owner      => 'root',
-  #  group      => 'root',
-  #  timeout    => 0,
-  #  require => [ Class['python'], Package['python35u'] ],
+  #  timeout    => 1800,
+  #  #require    => Class['postgresql::server'],
   #}
-  python::pip { 'psycopg2':
-    ensure     => '2.7.1',
-    pkgname    => 'psycopg2',
-    virtualenv => $venv,
-    owner      => 'root',
-    timeout    => 1800,
-    #require    => Class['postgresql::server'],
-  }
-  python::pip { 'uwsgi':
-    ensure     => latest,
-    pkgname    => 'uwsgi',
-    virtualenv => $venv,
-    owner      => 'root',
-    timeout    =>  1800,
-  }
+  #python::pip { 'uwsgi':
+  #  ensure     => latest,
+  #  pkgname    => 'uwsgi',
+  #  virtualenv => $venv,
+  #  owner      => 'root',
+  #  timeout    =>  1800,
+  #}
+
   #file { "requirements.txt" :
   #  #path   => "/home/${user}/src/requirements.txt",
   #  ensure => present,
