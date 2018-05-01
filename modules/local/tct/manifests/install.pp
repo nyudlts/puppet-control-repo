@@ -76,8 +76,6 @@ class tct::install (
     revision => $frontend_revision,
   }
 
-  #alert('Install backend repo - 1')
-
   # Install python3.5 from the RH community editions
   class { 'python':
     version                     => 'rh-python35-python',
@@ -210,6 +208,5 @@ class tct::install (
   #  require => Package['rubygems'],
   #}
 
-  alert('ENd of tct install')
 
 }
