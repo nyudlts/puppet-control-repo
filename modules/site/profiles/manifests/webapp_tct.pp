@@ -18,7 +18,34 @@ class profiles::webapp_tct(
 ) {
 
   include housekeeping
-  include dltsyumrepo::development
+  #include housekeeping::packages
+  #housekeeping::user{ 'root': }
+  #housekeeping::user{ $user: }
+  #housekeeping::gemrc{ 'root': }
+  #housekeeping::gemrc{ $user: }
+
+  class { 'ruby':
+    version         => 'rh-ruby22-ruby',
+    gems_version    => 'latest',
+    rubygems_update =>  true,
+  }
+  include ruby::dev
+  class { 'ruby::gemrc' :
+    gem_command => {
+      'gem'     => [ 'no-document' ],
+    }
+  }
+  file { 'rh-ruby22.sh' :
+    ensure  => file,
+    path    => '/etc/profile.d/rh-ruby22.sh',
+    content => template('profiles/rh-ruby22.sh.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+  ensure_packages(['psych'], {'ensure' => '2.2.4', 'provider' => 'gem'})
+
+  include dltsyumrepo::el7::test
 
   group {'dlib' :
     ensure => present,
@@ -26,6 +53,15 @@ class profiles::webapp_tct(
   }
 
   include tct
+  include nginx
+  nginx::resource::server { "tct.home.wfc" :
+    www_root =>  '/var/www/html',
+  }
 
+  firewall { '100 allow nginx access on 80' :
+    dport  => [80, 443],
+    proto  => tcp,
+    action => accept,
+  }
 
 }
