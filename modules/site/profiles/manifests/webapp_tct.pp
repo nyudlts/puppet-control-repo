@@ -18,7 +18,7 @@ class profiles::webapp_tct(
 ) {
 
   include housekeeping
-  include dltsyumrepo::development
+  include dltsyumrepo::el7::test
 
   group {'dlib' :
     ensure => present,
@@ -26,6 +26,15 @@ class profiles::webapp_tct(
   }
 
   include tct
+  include nginx
+  nginx::resource::server { "tct.home.wfc" :
+    www_root =>  '/var/www/html',
+  }
 
+  firewall { '100 allow nginx access on 80' :
+    dport  => [80, 443],
+    proto  => tcp,
+    action => accept,
+  }
 
 }

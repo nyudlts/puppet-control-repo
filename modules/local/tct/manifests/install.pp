@@ -76,12 +76,11 @@ class tct::install (
     revision => $frontend_revision,
   }
 
-  # Setup python
   # Install python3.5 from the RH community editions
   class { 'python':
     version                     => 'rh-python35-python',
     pip                         => 'present',
-    dev                         => 'present',
+    dev                         => 'latest',
     virtualenv                  => 'present',
     gunicorn                    => 'absent',
     use_epel                    => true,
