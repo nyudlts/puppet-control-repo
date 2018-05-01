@@ -1,4 +1,4 @@
-class profiles::dev_medialog_devenv {
+class profiles::webapp_medialog {
   include housekeeping
   
   class { 'postgresql::server': }
