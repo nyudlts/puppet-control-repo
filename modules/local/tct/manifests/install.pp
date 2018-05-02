@@ -38,7 +38,7 @@ class tct::install (
   String $www_dir          = lookup('tct::www_dir', String, 'first'),
   String $static_root      = lookup('tct::static_root', String, 'first'),
   String $tct_db           = lookup('tct::tct_db', String, 'first'),
-  String $venv             = lookup('tct::venv', String, 'first'),
+  String $venv_dir             = lookup('tct::venv_dir', String, 'first'),
   String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
  ){
 
@@ -115,17 +115,18 @@ class tct::install (
     owner      => 'root',
     timeout    => 1800,
   }->
-  python::pip { 'psycopg2':
-    ensure                            => '2.7.4',
-    #ensure                            => latest,
-    pkgname                           => 'psycopg2',
-    #virtualenv                        => $venv,
-    virtualenv                        => 'system',
-    owner                             => 'root',
-    timeout                           => 1800,
-    environment                       => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
-    #require                          => Class['postgresql::server'],
-  }
+  #python::pip { 'psycopg2':
+  #  #ensure      => '2.7.4',
+  #  ensure       => latest,
+  #  pkgname      => 'psycopg2',
+  #  install_args => '--no-binary :all:',
+  #  #virtualenv  => $venv_dir,
+  #  virtualenv   => 'system',
+  #  owner        => 'root',
+  #  timeout      => 1800,
+  #  environment  => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
+  #  #require     => Class['postgresql::server'],
+  #}
 
   file { "${install_dir}/etc" :
     ensure => 'directory',
@@ -133,69 +134,69 @@ class tct::install (
   file { "requirements.txt" :
     #path   => "/home/${user}/src/requirements.txt",
     ensure  => present,
-    #path    => "${venv}/requirements.txt",
+    #path    => "${venv_dir}/requirements.txt",
     path    => "${install_dir}/etc/requirements.txt",
     owner   => 'root',
     group   => 'root',
     mode    => "0644",
     source  => "puppet:///modules/tct/requirements.txt",
-    #require => File[ "$venv" ],
+    #require => File[ "$venv_dir" ],
     require => Class[ "python" ],
   }
-  python::pyvenv { $venv :
+  python::pyvenv { $venv_dir :
     ensure      => present,
     version     => '3.5',
     systempkgs  => true,
-    venv_dir    => $venv,
+    venv_dir    => $venv_dir,
     owner       => 'root',
     group       => 'root',
     path        => '/opt/rh/rh-python35/root/bin/:/bin:/usr/bin:/usr/local/bin',
     environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
     require     => [ Class['python'], File['requirements.txt'] ],
-    notify      => File[ "${venv}/bin/pip" ],
+    notify      => File[ "${venv_dir}/bin/pip" ],
   }
-  file { "${venv}/bin/pip" :
+  file { "${venv_dir}/bin/pip" :
     ensure => link,
     target => '/opt/rh/rh-python35/root/bin/pip',
   }
   python::pip { 'uWSGI':
     ensure     => latest,
     pkgname    => 'uWSGI',
-    virtualenv => $venv,
+    virtualenv => $venv_dir,
     owner      => 'root',
     timeout    =>  1800,
     environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
   }
-  #python::requirements { "${venv}/requirements.txt":
+  #python::requirements { "${venv_dir}/requirements.txt":
   python::requirements { "${install_dir}/etc/requirements.txt":
-    virtualenv                        => $venv,
+    virtualenv                        => $venv_dir,
     owner                             => 'root',
     group                             => 'root',
     environment                       => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
-    #require                           => [ File['requirements.txt'], Python::Pyvenv["${venv}"], ],
+    #require                           => [ File['requirements.txt'], Python::Pyvenv["${venv_dir}"], ],
     require                           => File['requirements.txt'],
  }
 
  # Documentation
   #file { 'requirements-documentation.txt':
   #  ensure                            => present,
-  #  path                              => "${venv}/requirements-documentaiton.txt",
+  #  path                              => "${venv_dir}/requirements-documentaiton.txt",
   #  owner                             => 'root',
   #  group                             => 'root',
   #  mode                              => '0644',
   #  source                            => "puppet:///modules/tct/requirements-documentation.txt",
   #}
-  #python::requirements { "${venv}/requirements-documentation.txt":
-  #  virtualenv                        => $venv,
+  #python::requirements { "${venv_dir}/requirements-documentation.txt":
+  #  virtualenv                        => $venv_dir,
   #  owner                             => 'root',
   #  group                             => 'root',
-  #  require                           => Python::Virtualenv["${venv}"],
+  #  require                           => Python::Virtualenv["${venv_dir}"],
   #}
 
   # Testing
   #file { "requirements-testing.txt" :
   #  ensure                            => present,
-  #  path                              => "${venv}/requirements-testing.txt",
+  #  path                              => "${venv_dir}/requirements-testing.txt",
   #  owner                             => 'root',
   #  group                             => 'root',
   #  mode                              => '0644',

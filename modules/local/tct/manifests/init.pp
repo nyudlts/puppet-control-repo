@@ -37,12 +37,14 @@ class tct (
   String $www_dir          = lookup('tct::www_dir', String, 'first'),
   String $static_root      = lookup('tct::static_root', String, 'first'),
   String $tct_db           = lookup('tct::tct_db', String, 'first'),
-  String $venv             = lookup('tct::venv', String, 'first'),
  ){
   alert("Alert - tct module ")
   crit("Crit - tct module ")
   include tct::install
   include tct::install::backend
   #include tct::install::nginx
-  #include tct::install::frontend
+  include tct::install::frontend
+  Class['tct::install']->
+  Class['tct::install::backend']->
+  Class['tct::install::frontend']
 }

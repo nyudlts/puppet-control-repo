@@ -6,16 +6,17 @@ loris::source_images: '/content/dev/images'
 puppetcron::environment: 'production'
 puppetcron::ensure: 'present'
 # TCT
-tct::allowed_hosts: "\'192.168.50.100\', 'www.tct.org', 'DLTS-FJ5-DYSON.BOBST.NYU.EDU', "
+tct::basename: '192.168.50.39'
+tct::allowed_hosts: "\'192.168.50.39\', 'www.tct.org', 'DLTS-FJ5-DYSON.BOBST.NYU.EDU', "
 tct::backend: 'backend'
 tct::backend_repo: 'https://github.com/NYULibraries/dlts-enm-tct-backend'
 tct::backend_revision: 'master'
-tct::basename: '192.168.50.100'
 #tct::basename: 'www.tct.org'
 tct::baseurl: "http://%{basename}/"
 tct::db_host: 'localhost'
 tct::db_password: 'cFHg*Liw45'
 tct::db_user: 'tctdb'
+tct::django_user: 'nginx'
 tct::frontend: 'dlts-enm-tct-frontend'
 tct::frontend_repo: 'https://github.com/NYULibraries/dlts-enm-tct-frontend'
 tct::frontend_revision: 'master'
@@ -26,7 +27,8 @@ tct::static_root: "%{install_dir}/www/static"
 tct::secret_key: 'some_long_random_string_of_letters_numbers_and_symbols'
 tct::tct_db: 'nyuotl_db'
 tct::user: 'tct'
-tct::venv: '/opt/tct/venv'
+#tct::venv: '/opt/tct/venv'
+tct::venv_dir: '/opt/tct/venv'
 tct::www_dir: '/var/www/html'
 tct::epubs_src_folder: "%{media_root}/epubs"
 

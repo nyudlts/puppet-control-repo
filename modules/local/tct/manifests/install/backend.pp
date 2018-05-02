@@ -26,6 +26,7 @@ class tct::install::backend (
   String $db_host       = lookup('tct::db_host', String, 'first'),
   String $db_password   = lookup('tct::db_password', String, 'first'),
   String $db_user       = lookup('tct::db_user', String, 'first'),
+  String $django_user   = lookup('tct::django_user', String, 'first'),
   String $frontend      = lookup('tct::frontend', String, 'first'),
   String $install_dir   = lookup('tct::install_dir', String, 'first'),
   String $media_root    = lookup('tct::media_root', String, 'first'),
@@ -35,19 +36,21 @@ class tct::install::backend (
   String $static_root   = lookup('tct::static_root', String, 'first'),
   String $tct_db        = lookup('tct::tct_db', String, 'first'),
   String $user          = lookup('tct::user', String, 'first'),
-  String $venv          = lookup('tct::venv', String, 'first'),
+  String $venv_dir          = lookup('tct::venv_dir', String, 'first'),
   String $www_dir       = lookup('tct::www_dir', String, 'first'),
 ){
 
   # postgres
   include postgresql::server
+  include postgresql::lib::devel
+  include postgresql::lib::python
   postgresql::server::db { $tct_db:
     user     => $db_user,
     password => postgresql_password($db_user, $db_password),
-  }
+  }->
   postgresql::server::role { 'tct_role':
     password_hash => postgresql_password('tct_role', '$db_password'),
-  }
+  }->
   postgresql::server::database_grant {$db_user:
     privilege => 'ALL',
     db        => $tct_db,
@@ -69,9 +72,15 @@ class tct::install::backend (
   }
   file { '/var/log/django':
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    owner  => $django_user,
+    group  => $django_user,
+    mode   => '0777',
+  }
+  file { '/var/log/django/nyu.log':
+    ensure => file,
+    owner  => $django_user,
+    group  => $django_user,
+    mode   => '0666',
   }
   file { "$pub_src":
   #file { "${install_dir}/www":
@@ -99,16 +108,19 @@ class tct::install::backend (
     mode   => '0777',
   }
 
-  # Hold our nose, do the exec thing, and run the python installer,
+  # Run the python installer,
   #  python manage.py loaddata indexpatterns.json
   # see: dlts-enm-tct-backend/documentation/site/setup/index.html
 
   exec { 'exec_manage_py_migrate':
-    path     => ['/opt/tct/virtualenv/bin','/bin','/usr/bin','/usr/local/b    in'],
+    #path     => ['/opt/tct/venv/bin','/bin','/usr/bin','/usr/local/bin'],
+    path     => ["${venv_dir}/bin",'/bin','/usr/bin','/usr/local/bin'],
     cwd      => "${install_dir}/${backend}",
     command  => 'python manage.py migrate',
     creates  => "${install_dir}/${backend}/reconciliation/__pycache__",
-    require  => File['secretkeys.json'],
+    environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
+    require  => [ File['secretkeys.json'], Python::Pyvenv["$venv_dir"], Python::Requirements["${install_dir}/etc/requirements.txt"], Class["postgresql::server"], Postgresql::Server::Database_grant["$db_user"], ],
+
     user     => 'root',
   }
 

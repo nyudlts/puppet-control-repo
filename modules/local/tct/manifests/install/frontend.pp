@@ -19,23 +19,23 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 class tct::install::frontend (
-  String $allowed_hosts = lookup('tct::allowed_hosts', String, 'first'),
-  String $backend       = lookup('tct::backend', String, 'first'),
-  String $basname       = lookup('tct::basename', String, 'first'),
-  String $baseurl       = lookup('tct::baseurl', String, 'first'),
-  String $db_host       = lookup('tct::db_host', String, 'first'),
-  String $db_password   = lookup('tct::db_password', String, 'first'),
-  String $db_user       = lookup('tct::db_user', String, 'first'),
-  String $frontend      = lookup('tct::frontend', String, 'first'),
-  String $install_dir   = lookup('tct::install_dir', String, 'first'),
-  String $media_root    = lookup('tct::media_root', String, 'first'),
-  String $epubs_src_folder = lookup('tct::epubs_src_folder', String, 'first'),
-  String $static_root   = lookup('tct::static_root', String, 'first'),
-  String $secret_key    = lookup('tct::secret_key', String, 'first'),
-  String $tct_db        = lookup('tct::tct_db', String, 'first'),
-  String $user          = lookup('tct::user', String, 'first'),
-  String $venv          = lookup('tct::venv', String, 'first'),
-  String $www_dir       = lookup('tct::www_dir', String, 'first'),
+  String $allowed_hosts     = lookup('tct::allowed_hosts', String, 'first'),
+  String $backend           = lookup('tct::backend', String, 'first'),
+  String $basename          = lookup('tct::basename', String, 'first'),
+  String $baseurl           = lookup('tct::baseurl', String, 'first'),
+  String $db_host           = lookup('tct::db_host', String, 'first'),
+  String $db_password       = lookup('tct::db_password', String, 'first'),
+  String $db_user           = lookup('tct::db_user', String, 'first'),
+  String $frontend          = lookup('tct::frontend', String, 'first'),
+  String $frontend_revision = lookup('tct::frontend_revision', String, 'first'),
+  String $install_dir       = lookup('tct::install_dir', String, 'first'),
+  String $media_root        = lookup('tct::media_root', String, 'first'),
+  String $epubs_src_folder  = lookup('tct::epubs_src_folder', String, 'first'),
+  String $static_root       = lookup('tct::static_root', String, 'first'),
+  String $secret_key        = lookup('tct::secret_key', String, 'first'),
+  String $tct_db            = lookup('tct::tct_db', String, 'first'),
+  String $user              = lookup('tct::user', String, 'first'),
+  String $www_dir           = lookup('tct::www_dir', String, 'first'),
 ){
 
 
@@ -55,7 +55,7 @@ class tct::install::frontend (
     ensure   => present,
     provider => git,
     source   => "https://github.com/NYULibraries/${frontend}",
-    revision => $revision,
+    revision => $frontend_revision,
   }
   # the file resource for bower.json is a total kludge
   # that needs to be fixed in the repo.
@@ -113,6 +113,4 @@ class tct::install::frontend (
     #try_sleep => '1',
     user       => 'root',
   }
-
-
 }

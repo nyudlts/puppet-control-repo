@@ -17,12 +17,7 @@ class profiles::webapp_tct(
   $www_dir = '/var/www',
 ) {
 
-  include housekeeping
-  #include housekeeping::packages
-  #housekeeping::user{ 'root': }
-  #housekeeping::user{ $user: }
-  #housekeeping::gemrc{ 'root': }
-  #housekeeping::gemrc{ $user: }
+  include housekeeping::packages
 
 
   ensure_packages(['rh-ruby22-ruby'], {'ensure' => 'present'})
