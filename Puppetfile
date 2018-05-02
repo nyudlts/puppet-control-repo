@@ -163,3 +163,11 @@ mod 'treydock/yum_cron',
     :git => 'git://github.com/treydock/puppet-yum_cron.git',
     :tag => '2.0.0'
 
+mod 'talend/sbt',
+    :git => 'git://github.com/Talend/puppet-sbt',
+    :tag => '0.2.0'
+
+mod 'maestrodev/wget',
+    :git => 'git://github.com/voxpupuli/puppet-wget',
+    :tag => 'v1.7.3'  
+
