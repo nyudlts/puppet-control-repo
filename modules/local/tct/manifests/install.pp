@@ -127,19 +127,20 @@ class tct::install (
     #require                          => Class['postgresql::server'],
   }
 
-  #file { 'venv-dir' :
-  #  ensure => 'directory',
-  #  path   => $venv,
-  #}
+  file { "${install_dir}/etc" :
+    ensure => 'directory',
+  }
   file { "requirements.txt" :
     #path   => "/home/${user}/src/requirements.txt",
     ensure  => present,
-    path    => "${venv}/requirements.txt",
+    #path    => "${venv}/requirements.txt",
+    path    => "${install_dir}/etc/requirements.txt",
     owner   => 'root',
     group   => 'root',
     mode    => "0644",
     source  => "puppet:///modules/tct/requirements.txt",
     #require => File[ "$venv" ],
+    require => Class[ "python" ],
   }
   python::pyvenv { $venv :
     ensure      => present,
@@ -150,8 +151,9 @@ class tct::install (
     group       => 'root',
     path        => '/opt/rh/rh-python35/root/bin/:/bin:/usr/bin:/usr/local/bin',
     environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
-    require     => Class['python'],
-  }->
+    require     => [ Class['python'], File['requirements.txt'] ],
+    notify      => File[ "${venv}/bin/pip" ],
+  }
   file { "${venv}/bin/pip" :
     ensure => link,
     target => '/opt/rh/rh-python35/root/bin/pip',
@@ -164,7 +166,8 @@ class tct::install (
     timeout    =>  1800,
     environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
   }
-  python::requirements { "${venv}/requirements.txt":
+  #python::requirements { "${venv}/requirements.txt":
+  python::requirements { "${install_dir}/etc/requirements.txt":
     virtualenv                        => $venv,
     owner                             => 'root',
     group                             => 'root',
@@ -199,8 +202,6 @@ class tct::install (
   #  source                            => "puppet:///modules/tct/requirements-testing.txt",
   #}
   
-  #ensure_packages({'psych'            => { ensure => '3.0.2' } ,  'mypackage' => { source => '/tmp/myrpm-1.0.0.x86_64.rpm', provider => "rpm" }}, {'ensure' => 'present'})
-
 
   #package { 'pysch' :
   #  ensure   => '3.0.2',

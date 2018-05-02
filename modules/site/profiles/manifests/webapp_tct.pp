@@ -24,6 +24,9 @@ class profiles::webapp_tct(
   #housekeeping::gemrc{ 'root': }
   #housekeeping::gemrc{ $user: }
 
+
+  ensure_packages(['rh-ruby22-ruby'], {'ensure' => 'present'})
+
   class { 'ruby':
     version         => 'rh-ruby22-ruby',
     gems_version    => 'latest',
@@ -35,6 +38,7 @@ class profiles::webapp_tct(
       'gem'     => [ 'no-document' ],
     }
   }
+
   file { 'rh-ruby22.sh' :
     ensure  => file,
     path    => '/etc/profile.d/rh-ruby22.sh',
