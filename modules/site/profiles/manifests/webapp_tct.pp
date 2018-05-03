@@ -134,16 +134,18 @@ class profiles::webapp_tct(
 
     # create directories for uwsgi
   file { '/run/uwsgi' :
-    ensure => directory,
-    owner  => $user,
-    group  => 'nginx',
-    mode   => '0775',
+    ensure  => directory,
+    owner   => $user,
+    group   => 'nginx',
+    mode    => '0775',
+    require => Class['nginx'],
   }
   file { '/var/log/uwsgi' :
     ensure => directory,
     owner  => $user,
     group  => 'nginx',
     mode   => '0775',
+    require => Class['nginx'],
   }
   file { '/var/log/uwsgi/nyu.log' :
     ensure => file,
@@ -170,13 +172,17 @@ class profiles::webapp_tct(
   #  path    => "${install_dir}/uwsgi/myapp.ini",
   #  content => template('tct/myapp.ini.erb'),
   #}
+  alert("install_dir: $install_dir")
+  alert("backend: $backend")
   $uwsgi_ini = "enm_uwsgi.ini"
   file { $uwsgi_ini :
     ensure  => file,
     owner   => $user,
     group   => 'nginx',
     path    => "${install_dir}/${backend}/$uwsgi_ini",
+    #path    => "${install_dir}/${backend}/enm_uwsgi.ini",
     content => template('tct/enm_uwsgi.ini.erb'),
+    require    => [ Python::Pip['uwsgi'], File['/etc/systemd/system/uwsgi.service'], File['/var/log/uwsgi/nyu.log'], File['/run/uwsgi'], Class['nginx'], ],
   }
   # Load the wsgi script
   #file { 'wsgi.py' :
