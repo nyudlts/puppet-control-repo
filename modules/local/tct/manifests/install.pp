@@ -63,18 +63,18 @@ class tct::install (
 
   # Install the repos
   alert('Install backend repo')
-  vcsrepo { "${install_dir}/${backend}":
-    ensure   => present,
-    provider => git,
-    source   => $backend_repo,
-    revision => $backend_revision,
-  }
-  vcsrepo { "${install_dir}/${frontend}":
-    ensure   => present,
-    provider => git,
-    source   => $frontend_repo,
-    revision => $frontend_revision,
-  }
+  #vcsrepo { "${install_dir}/${backend}":
+  #  ensure   => present,
+  #  provider => git,
+  #  source   => $backend_repo,
+  #  revision => $backend_revision,
+  #}
+  #vcsrepo { "${install_dir}/${frontend}":
+  #  ensure   => present,
+  #  provider => git,
+  #  source   => $frontend_repo,
+  #  revision => $frontend_revision,
+  #}
 
   # Install python3.5 from the RH community editions
   class { 'python':

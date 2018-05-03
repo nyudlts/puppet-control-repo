@@ -39,11 +39,10 @@ class tct (
   String $tct_db           = lookup('tct::tct_db', String, 'first'),
  ){
   alert("Alert - tct module ")
-  crit("Crit - tct module ")
   include tct::install
   include tct::install::backend
-  #include tct::install::nginx
   include tct::install::frontend
+
   Class['tct::install']->
   Class['tct::install::backend']->
   Class['tct::install::frontend']
