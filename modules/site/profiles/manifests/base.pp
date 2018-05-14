@@ -58,7 +58,9 @@ class profiles::base {
                         ],
       require => User['puppet'],
     }
-    include housekeeping
+    # housekeeping has been disabled here.
+    # it must be explicitly added in the profile
+    # include housekeeping
     class { 'localtime':
         zone => 'America/New_York',
     }
