@@ -159,14 +159,15 @@ class tct::install (
     ensure => link,
     target => '/opt/rh/rh-python35/root/bin/pip',
   }
-  python::pip { 'uWSGI':
-    ensure     => latest,
-    pkgname    => 'uWSGI',
-    virtualenv => $venv_dir,
-    owner      => 'root',
-    timeout    =>  1800,
-    environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
-  }
+  #python::pip { 'uWSGI':
+  #  ensure     => latest,
+  #  pkgname    => 'uWSGI',
+  #  virtualenv => $venv_dir,
+  #  owner      => 'root',
+  #  timeout    =>  1800,
+  #  environment => 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/rh-python35/root/usr/lib64/',
+  #}
+  ensure_packages(['uwsgi', 'uwsgi-plugin-python35u'], {'ensure' => 'present'})
   #python::requirements { "${venv_dir}/requirements.txt":
   python::requirements { "${install_dir}/etc/requirements.txt":
     virtualenv                        => $venv_dir,
