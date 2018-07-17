@@ -18,5 +18,9 @@ class profiles::build_dockerfactory {
   #}
 
   include docker
+  group { 'docker':
+    members => ['vagrant'],
+    require => Class['docker'],
+  }
 }
 
