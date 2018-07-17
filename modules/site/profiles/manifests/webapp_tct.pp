@@ -144,14 +144,14 @@ class profiles::webapp_tct(
     ensure => directory,
     owner  => $user,
     group  => 'nginx',
-    mode   => '0775',
+    mode   => '0777',
     require => Class['nginx'],
   }
   file { '/var/log/uwsgi/nyu.log' :
     ensure => file,
     owner  => $user,
     group  => 'nginx',
-    mode   => '0664',
+    mode   => '0666',
   }
 
   # Install uwsgi

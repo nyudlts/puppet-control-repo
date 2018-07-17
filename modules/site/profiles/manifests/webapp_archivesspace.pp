@@ -11,7 +11,7 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class profiles::webapp_archivesspace (
-  $ensure         = lookup('archivesspace::ensure', String, 'first'),
+  #$ensure         = lookup('archivesspace::ensure', String, 'first'),
   $version        = lookup('archivesspace::version', String, 'first'),
   $install_dir    = lookup('archivesspace::install_dir', String, 'first'),
   $conf_dir       = lookup('archivesspace::conf_dir', String, 'first'),
@@ -51,11 +51,7 @@ class profiles::webapp_archivesspace (
     ensure => present,
     gid    => '200',
   }
-  #accounts::account { 'esha' : }
-  #accounts::account { 'don' : }
   #accounts::account { 'flannon' : }
-  #accounts::account { 'joe' : }
-  #accounts::account { 'ekate' : }
 
   # Addd dlib group to sudoers
   file_line { 'sudo_rule_nopw':
@@ -82,15 +78,6 @@ class profiles::webapp_archivesspace (
   class { 'java':
     package => 'java-1.8.0-openjdk',
   }
-  #include housekeeping::nfs
-
-  # mount efs volumes
-  #file { "${install_dir}/data" :
-  #  ensure => directory,
-  #  owner  => $user,
-  #  group  => $user,
-  #  mode   => '0755',
-  #}
 
   
   include profiles::db_mysql
@@ -102,7 +89,7 @@ class profiles::webapp_archivesspace (
   notice("Version: $version")
   alert("Version: $version")
   class  { archivesspace: 
-    ensure                         => $ensure, 
+    #ensure                         => $ensure, 
     version                        => $version,
     install_dir                    => $install_dir,
     conf_dir                       => $conf_dir,
@@ -135,8 +122,6 @@ class profiles::webapp_archivesspace (
     #plugin_sso_revision            => $plugin_sso_revision, 
   }
 
-  #  require => Efsmount::Mount_volume['/opt/archivesspace/data/solr_backups'],
-  #}
 
   ##
   #  Make sure the solr_home directory tree exists
@@ -148,89 +133,101 @@ class profiles::webapp_archivesspace (
   #            ]
   #
   #file { $solr_home:
-  #  ensure  => 'directory',
-  #  owner   => $user,
-  #  group   => $user,
-  #  mode    => '0700',
-  #  #require => Class['archivesspace::install'],
-  #  #notify  => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
+  #  ensure      => 'directory',
+  #  owner       => $user,
+  #  group       => $user,
+  #  mode        => '0700',
+  #  #require    => Class['archivesspace::install'],
+  #  #notify     => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
   #}
 
   ##
   #  Load plugins
   ##
-  #archivesspace::plugin { 'nyu_marcxml_export_plugin' :
-  #  ensure          => 'present',
-  #  plugin          => 'nyu_marcxml_export_plugin',
-  #  plugin_source   => 'https://github.com/NYULibraries/nyu_marcxml_export_plugin.git',
-  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-  #  #plugin_revision => $plugin_marcxml_export_revision,
-  #  plugin_revision => 'production',
-  #  require         => Class['archivesspace::install'],
-  #}
-  #archivesspace::plugin { 'nyu_ead_export_plugin' :
-  #  ensure          => 'present',
-  #  plugin          => 'nyu_ead_export_plugin',
-  #  plugin_source   => 'https://github.com/NYULibraries/nyu_ead_export_plugin.git',
-  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-  #  plugin_revision => $plugin_ead_export_revision,
-  #  require         => Class['archivesspace::install'],
-  #}
-  #archivesspace::plugin { 'hudmol_digitization_work_order' :
-  #  ensure          => 'present',
-  #  plugin          => 'digitization_work_order',
-  #  plugin_source   => 'https://github.com/hudmol/digitization_work_order.git',
-  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-  #  plugin_revision => 'master',
-  #  require         => Class['archivesspace::install'],
-  #}
-  #archivesspace::plugin { 'nyu_sso_plugin' :
-  #  ensure          => present,
-  #  plugin          => 'nyu_sso_plugin',
-  #  plugin_source   => 'https://github.com/NYULibraries/nyu_sso_plugin.git',
-  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\']',
-  #  plugin_revision => $plugin_sso_revision,
-  #  require         => Class['archivesspace::install'],
-  #}
-  #exec { 'initialize-plugin.sh nyu_sso_plugin' :
-  #  cwd     => "${install_dir}/plugins/nyu_sso_plugin",
-  #  command => "${install_dir}/scripts/initialize-plugin.sh nyu_sso_plugin",
-  #  timeout => 2600,
-  #  creates => "${install_dir}/plugins/.initialize-nyu_sso_plugin-complete",
-  #  require => Archivesspace::Plugin['nyu_sso_plugin'],
-  #  notify  => File["${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete"],
-  #}->
-  #class { 'archivesspace::service' : }
-  #file { "${install_dir}/plugins/nyu_sso_plugin/.initialize-nyu_sso_plugin-complete" :
-  #  ensure  => present,
-  #  content => 'nyu_sso_plugin gems installed.',
-  #  owner   => $user,
-  #  group   => $group,
-  #}
+  archivesspace::plugin { 'nyu_marcxml_export_plugin' :
+    ensure          => 'present',
+    plugin          => 'nyu_marcxml_export_plugin',
+    plugin_source   => 'https://github.com/NYULibraries/nyu_marcxml_export_plugin.git',
+    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\' \'aspace-import-excel\' ]',
+    #plugin_revision => $plugin_marcxml_export_revision,
+    plugin_revision => 'production',
+    require         => Class['archivesspace::install'],
+  }
+  archivesspace::plugin { 'nyu_ead_export_plugin' :
+    ensure          => 'present',
+    plugin          => 'nyu_ead_export_plugin',
+    plugin_source   => 'https://github.com/NYULibraries/nyu_ead_export_plugin.git',
+    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
+    plugin_revision => $plugin_ead_export_revision,
+    require         => Class['archivesspace::install'],
+  }
+  archivesspace::plugin { 'hudmol_digitization_work_order' :
+    ensure          => 'present',
+    plugin          => 'digitization_work_order',
+    plugin_source   => 'https://github.com/hudmol/digitization_work_order.git',
+    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
+    plugin_revision => 'master',
+    require         => Class['archivesspace::install'],
+  }
+  # harvard-library/aspace-import-excel
+  ensure_packages([
+    'rh-ruby22',
+    'rh-ruby22-build',
+    'rh-ruby22-ruby',
+    'rh-ruby22-ruby-devel',
+    'rh-ruby22-rubygem-rake',
+  ], {'ensure'   => 'present'} )
+
+  ensure_packages([
+    'rubyXL',
+  ], {'provider' => 'gem', 'ensure' => '3.1.0'})
+
+  $enableruby22 = "#!/bin/bash
+    source scl_source enable rh-ruby22
+    "
+
+  file { '/etc/profile.d/enableruby22.sh' :
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $enableruby22,
+    #notify => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
+  }
+  archivesspace::plugin { 'aspace-import-excel' :
+    ensure          => 'present',
+    plugin          => 'aspace-import-excel',
+    plugin_source   => 'https://github.com/harvard-library/aspace-import-excel.git',
+    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
+    plugin_revision => 'v2.1.9',
+    require         => Class['archivesspace::install'],
+  }
+
+
   firewall { '100 allow http and https access':
     dport  => [ 80, 8080, 8081, 8082, 8089, 8090, 8091 ],
     proto  => tcp,
     action => accept,
   }
   #firewall { '102 forward port 80 to 8080':
-  #  table   => 'nat',
-  #  chain   => 'PREROUTING',
-  #  iniface => 'eth0',
-  #  proto   => 'tcp',
-  #  dport   => '80',
-  #  jump    => 'REDIRECT',
-  #  toports => 8080,
+  #  table       => 'nat',
+  #  chain       => 'PREROUTING',
+  #  iniface     => 'eth0',
+  #  proto       => 'tcp',
+  #  dport       => '80',
+  #  jump        => 'REDIRECT',
+  #  toports     => 8080,
   #}
 
   # set up the db
   #include profiles::db_mysql
   #mysql::db { 'asdb' :
-  #  user     => $db_user,
-  #  password => $db_passwd,
-  #  dbname   => $db_name,
-  #  host     => 'localhost',
-  #  grant    => [ 'ALL' ],
-  #  #notify   => Class['archivesspace'],
+  #  user        => $db_user,
+  #  password    => $db_passwd,
+  #  dbname      => $db_name,
+  #  host        => 'localhost',
+  #  grant       => [ 'ALL' ],
+  #  #notify     => Class['archivesspace'],
   #}
   include mysql::client
   include mysql::bindings
