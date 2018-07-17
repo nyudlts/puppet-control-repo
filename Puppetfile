@@ -27,10 +27,10 @@ mod 'puppetlabs/concat',
   :git => 'git://github.com/puppetlabs/puppetlabs-concat',
   :tag => '4.1.1'
 
-mod 'puppetlabs/puppetlabs-docker',
-    :git => 'git://github.com/puppetlabs/puppetlabs-docker',
-    :tag => '1.1.0'
-
+#mod 'puppetlabs/puppetlabs-docker',
+#    :git => 'git://github.com/puppetlabs/puppetlabs-docker',
+#    :tag => '1.1.0'
+#
 #mod 'fj5/dlib_apache_tlon',
 #    :git => 'git://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
 #    #:git => 'https://v3.es.its.nyu.edu/fj5/dlib_apache_tlon.git'
