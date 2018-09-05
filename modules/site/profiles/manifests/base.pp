@@ -76,7 +76,7 @@ class profiles::base {
         servers  => [ 'tick.nyu.edu', 'tock.nyu.edu' ],
     }
     include stdlib
-    include vim
+    #include vim
     #class { 'yum_autoupdate':
     #    #notify_email => false,
     #    email_to     => 'flannon@nyu.edu',
