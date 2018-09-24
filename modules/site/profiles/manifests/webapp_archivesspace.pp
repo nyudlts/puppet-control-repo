@@ -148,7 +148,7 @@ class profiles::webapp_archivesspace (
     ensure          => 'present',
     plugin          => 'nyu_marcxml_export_plugin',
     plugin_source   => 'https://github.com/NYULibraries/nyu_marcxml_export_plugin.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\' \'aspace-import-excel\' ]',
+    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
     #plugin_revision => $plugin_marcxml_export_revision,
     plugin_revision => 'production',
     require         => Class['archivesspace::install'],
