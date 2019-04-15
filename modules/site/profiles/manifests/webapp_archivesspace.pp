@@ -166,7 +166,8 @@ class profiles::webapp_archivesspace (
     plugin          => 'digitization_work_order',
     plugin_source   => 'https://github.com/hudmol/digitization_work_order.git',
     plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
-    plugin_revision => 'master',
+    #plugin_revision => 'master',
+    plugin_revision => 'v1.6',
     require         => Class['archivesspace::install'],
   }
   ## harvard-library/aspace-import-excel
