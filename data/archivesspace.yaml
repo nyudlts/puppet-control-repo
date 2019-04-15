@@ -1,7 +1,7 @@
 ---
 message: "This node is using common data"
 archivesspace::ensure: true
-archivesspace::version: '2.5.1-1.el7.centos'
+archivesspace::version: '2.5.2-1.el7.centos'
 archivesspace::install_dir: "/opt/archivesspace"
 archivesspace::conf_dir: "%{install_dir}/config"
 archivesspace::conf_file: "/opt/archivesspace/config/config.rb"
