@@ -171,38 +171,38 @@ class profiles::webapp_archivesspace (
     require         => Class['archivesspace::install'],
   }
   ## harvard-library/aspace-import-excel
-  ensure_packages([
-    'rh-ruby22',
-    'rh-ruby22-build',
-    'rh-ruby22-ruby',
-    'rh-ruby22-ruby-devel',
-    'rh-ruby22-rubygem-rake',
-  ], {'ensure'   => 'present'} )
-  
-  ensure_packages([
-    'rubyXL',
-  ], {'provider' => 'gem', 'ensure' => '3.1.0'})
-  
-  $enableruby22 = "#!/bin/bash
-    source scl_source enable rh-ruby22
-    "
-  #
-  file { '/etc/profile.d/enableruby22.sh' :
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => $enableruby22,
-    #notify => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
-  }
-  archivesspace::plugin { 'aspace-import-excel' :
-    ensure          => 'present',
-    plugin          => 'aspace-import-excel',
-    plugin_source   => 'https://github.com/harvard-library/aspace-import-excel.git',
-    plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
-    plugin_revision => 'v2.1.18',
-    require         => Class['archivesspace::install'],
-  }
+  #ensure_packages([
+  #  'rh-ruby22',
+  #  'rh-ruby22-build',
+  #  'rh-ruby22-ruby',
+  #  'rh-ruby22-ruby-devel',
+  #  'rh-ruby22-rubygem-rake',
+  #], {'ensure'   => 'present'} )
+  # 
+  #ensure_packages([
+  #  'rubyXL',
+  #], {'provider' => 'gem', 'ensure' => '3.1.0'})
+  # 
+  #$enableruby22 = "#!/bin/bash
+  #  source scl_source enable rh-ruby22
+  #  "
+  ##
+  #file { '/etc/profile.d/enableruby22.sh' :
+  #  ensure  => file,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  content => $enableruby22,
+  #  #notify => Archivesspace::Plugin['nyu_marcxml_export_plugin'],
+  #}
+  #archivesspace::plugin { 'aspace-import-excel' :
+  #  ensure          => 'present',
+  #  plugin          => 'aspace-import-excel',
+  #  plugin_source   => 'https://github.com/harvard-library/aspace-import-excel.git',
+  #  plugin_conf     => 'AppConfig[:plugins] = [\'nyu_marcxml_export_plugin\', \'nyu_ead_export_plugin\', \'nyu_sso_plugin\', \'digitization_work_order\', \'aspace-import-excel\' ]',
+  #  plugin_revision => 'v2.1.18',
+  #  require         => Class['archivesspace::install'],
+  #}
 
 
   firewall { '100 allow http and https access':
